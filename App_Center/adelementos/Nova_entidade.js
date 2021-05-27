@@ -7,23 +7,23 @@ import { ListItem } from "react-native-elements";
 const list = [
   {
     title: "participação individual",
-    component: "Participacoes",
+    component: "Participacao individual",
   },
   {
-    title: "setor público",
-    component: "Novo evento",
+    title: "Setor Público",
+    component: "setor publico",
   },
   {
-    title: "setor privado",
-    component: "Nova entidade",
+    title: "Setor Privado",
+    component: "setor privado",
   },
   {
     title: "terceiro setor",
-    component: "Voluntario",
+    component: "terceiro setor",
   },
   {
     title: "rede de entidades",
-    component: "Recurso",
+    component: "rede de entidades",
   },
 ];
 export default function Nova_Entidade({ navigation }) {

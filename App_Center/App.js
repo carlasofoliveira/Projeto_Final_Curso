@@ -18,6 +18,10 @@ import Participacao_individual from "./adelementos/Participacoes";
 import Splash from "./screens/Splash";
 import Tutorial from "./screens/tutorial";
 import adicionar_Voluntarios from "./adelementos/Voluntario";
+import setor_publico from "./adelementos/Setor_publico";
+import setor_privado from "./adelementos/Setor_privado";
+import terceiro_setor from "./adelementos/terceiro_setor";
+import redes_entidades from "./adelementos/rede_entidades";
 //import SimpleImagePicker from "./adelementos/SimpleImagePicker";
 //import imagepickerground from "./adelementos/SimpleImagePicker";
 
@@ -32,6 +36,7 @@ function AdicionarTabNavigator (){
       <Tab.Screen name="Guardados" component={Guardados} />
       <Tab.Screen name="Notificacoes" component={Notificacoes} />
     </Tab.Navigator>
+   
     );
 }
 
@@ -73,7 +78,39 @@ const App = () => {
               backgroundColor: '#4F81C7',
             },
           }}/>
-        <Stack.Screen name='Participacoes' component={Participacao_individual}options={{
+        <Stack.Screen name='Participacao individual' component={Participacao_individual}options={{
+          headerTitleStyle: {
+            color: 'white',
+          },
+            headerStyle: {
+              backgroundColor: '#4F81C7',
+            },
+          }} />
+          <Stack.Screen name='setor publico' component={setor_publico}options={{
+          headerTitleStyle: {
+            color: 'white',
+          },
+            headerStyle: {
+              backgroundColor: '#4F81C7',
+            },
+          }} />
+           <Stack.Screen name='setor privado' component={setor_privado}options={{
+          headerTitleStyle: {
+            color: 'white',
+          },
+            headerStyle: {
+              backgroundColor: '#4F81C7',
+            },
+          }} />
+           <Stack.Screen name='terceiro setor' component={terceiro_setor}options={{
+          headerTitleStyle: {
+            color: 'white',
+          },
+            headerStyle: {
+              backgroundColor: '#4F81C7',
+            },
+          }} />
+          <Stack.Screen name='redes de entidades' component={redes_entidades}options={{
           headerTitleStyle: {
             color: 'white',
           },
