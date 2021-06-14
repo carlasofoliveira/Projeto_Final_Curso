@@ -1,5 +1,5 @@
 import React from "react";
-import { View, StyleSheet } from "react-native";
+import { View, StyleSheet, Button } from "react-native";
 import { ListItem } from "react-native-elements";
 
 const list = [
@@ -21,7 +21,7 @@ const list = [
   },
   {
     title: "Recurso",
-    component: "Recursos",
+    component: "Novo Recurso",
   },
   {
     title: "Ideia",
@@ -46,9 +46,12 @@ export default AdicionarLista = ({ navigation }) => {
               {item.title}
             </ListItem.Title>
           </ListItem.Content>
-          <ListItem.Chevron style={styles.Chevron} />
+          <ListItem.Chevron  />
         </ListItem>
       ))}
+      <View>
+    
+      </View>
     </View>
   );
 };
@@ -69,7 +72,5 @@ const styles = StyleSheet.create({
   back: {
     backgroundColor: "#EEF5FF",
   },
-  Chevron: {
-    tintColor: "#EEF5FF",
-  },
+  
 });

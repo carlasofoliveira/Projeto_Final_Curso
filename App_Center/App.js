@@ -1,5 +1,6 @@
 import "react-native-gesture-handler";
 import React from "react";
+import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./screens/Home";
@@ -13,7 +14,7 @@ import Guardados from "./screens/Guardados";
 import Notificacoes from "./screens/Notificacoes";
 import adicionar_Iniciativas from "./adelementos/Iniciativa";
 import adicionar_Recursos from "./adelementos/Recurso";
-import Mapa from './screens/Mapa';
+import Mapa from "./screens/Mapa";
 import Participacao_individual from "./adelementos/Participacoes";
 import Splash from "./screens/Splash";
 import Tutorial from "./screens/tutorial";
@@ -22,157 +23,327 @@ import setor_publico from "./adelementos/Setor_publico";
 import setor_privado from "./adelementos/Setor_privado";
 import terceiro_setor from "./adelementos/terceiro_setor";
 import redes_entidades from "./adelementos/rede_entidades";
+import checkmark_entidade from "./adelementos/checkmark_perfil";
+import Pos_registo from "./adelementos/Registo_feito";
+import detalhes_entidade from "./adelementos/detalhes_entidade";
+import entrar_criar from "./adelementos/entrar_criar";
+import
+ MaterialCommunityIcons
+from 'react-native-vector-icons/MaterialCommunityIcons';
+
+
+
 //import SimpleImagePicker from "./adelementos/SimpleImagePicker";
 //import imagepickerground from "./adelementos/SimpleImagePicker";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
-function AdicionarTabNavigator (){
-  return(
-    <Tab.Navigator >
-      <Tab.Screen name="Inicio" component={Home} styles={{ backgroundColor: '#FFFFFF'}} />
-      <Tab.Screen  name="Ideia" component={Ideias} />
-      <Tab.Screen name="Adicionar" component={AdicionarLista} />
-      <Tab.Screen name="Guardados" component={Guardados} />
-      <Tab.Screen name="Notificacoes" component={Notificacoes} />
-    </Tab.Navigator>
-   
-    );
+
+function getHeaderTitle(route) {
+  // If the focused route is not found, we need to assume it's the initial screen
+  // This can happen during if there hasn't been any navigation inside the screen
+  // In our case, it's "Feed" as that's the first screen inside the navigator
+  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Feed';
+
+  switch (routeName) {
+    case 'Inicio':
+      return 'Inicio';
+    case 'Ideia':
+      return 'Ideia';
+    case 'Adicionar':
+      return 'Adicionar';
+      case 'Guardados':
+      return 'Guardados';
+      case 'Notificacoes':
+        return 'Notificações';
+    default:
+      return 'Nome Indeterminado';
+  }
 }
 
+function AdicionarTabNavigator({ navigation, route }) {
+  React.useLayoutEffect(() => {
+    navigation.setOptions({ headerTitle: getHeaderTitle(route) });
+  }, [navigation, route]);
+  return (
+    <Tab.Navigator>
+      <Tab.Screen
+        name="Inicio"
+        component={Home}
+        styles={{ backgroundColor: "#FFFFFF" }}
+        options={{
+          tabBarLabel: 'Inicio',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="home"
+              color={color}
+              size={size}
+            />
+          ),
+        }} 
+      />
+      <Tab.Screen name="Ideia" component={Ideias} options={{
+          tabBarLabel: 'ideia',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name=""
+              color={color}
+              size={size}
+            />
+          ),
+        }}  />
+      <Tab.Screen name="Adicionar" component={AdicionarLista} options={{
+          tabBarLabel: 'Adicionar',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="plus"
+              color={color}
+              size={size}
+            />
+          ),
+        }} />
+      <Tab.Screen name="Guardados" component={Guardados} options={{
+          tabBarLabel: 'Guardar',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="checkbox-marked"
+              color={color}
+              size={size}
+            />
+          ),
+        }}/>
+      <Tab.Screen name="Notificacoes" component={Notificacoes} options={{
+          tabBarLabel: 'Notificações',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="bell"
+              color={color}
+              size={size}
+            />
+          ),
+        }}/>
+      <Tab.Screen name="checkmark_perfil" component={checkmark_entidade} />
+      <Tab.Screen name="entrar criar" component={entrar_criar} />
+    </Tab.Navigator>
+  );
+}
 
 const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        <Stack.Screen name='Home' component={AdicionarTabNavigator} options={{
-            title: 'Home',
-            headerTitleStyle: {
-              color: '#fff',
-            },
-            headerStyle: {
-              backgroundColor: '#4F81C7',
-            },
-          }} />
-          <Stack.Screen name='Iniciativas' component={adicionar_Iniciativas} options={{
-            headerTitleStyle: {
-              color: 'white',
-            },
-            headerStyle: {
-              backgroundColor: '#4F81C7',
-            },
-          }}/>
-        <Stack.Screen name='Novo evento' component={Novo_Evento} options={{
-           headerTitleStyle: {
-            color: 'white',
-          },
-            headerStyle: {
-              backgroundColor: '#4F81C7',
-            },
-          }} />
-        <Stack.Screen name='Nova entidade' component={Nova_Entidade} options={{
+      <Stack.Screen
+        name="Home"
+        component={AdicionarTabNavigator}
+        options={{
+          title: "Home",
           headerTitleStyle: {
-            color: 'white',
+            color: "#fff",
           },
-            headerStyle: {
-              backgroundColor: '#4F81C7',
-            },
-          }}/>
-        <Stack.Screen name='Participacao individual' component={Participacao_individual}options={{
-          headerTitleStyle: {
-            color: 'white',
+          headerStyle: {
+            backgroundColor: "#4F81C7",
           },
-            headerStyle: {
-              backgroundColor: '#4F81C7',
-            },
-          }} />
-          <Stack.Screen name='setor publico' component={setor_publico}options={{
-          headerTitleStyle: {
-            color: 'white',
-          },
-            headerStyle: {
-              backgroundColor: '#4F81C7',
-            },
-          }} />
-           <Stack.Screen name='setor privado' component={setor_privado}options={{
-          headerTitleStyle: {
-            color: 'white',
-          },
-            headerStyle: {
-              backgroundColor: '#4F81C7',
-            },
-          }} />
-           <Stack.Screen name='terceiro setor' component={terceiro_setor}options={{
-          headerTitleStyle: {
-            color: 'white',
-          },
-            headerStyle: {
-              backgroundColor: '#4F81C7',
-            },
-          }} />
-          <Stack.Screen name='redes de entidades' component={redes_entidades}options={{
-          headerTitleStyle: {
-            color: 'white',
-          },
-            headerStyle: {
-              backgroundColor: '#4F81C7',
-            },
-          }} />
-
-           <Stack.Screen name='Voluntarios' component={adicionar_Voluntarios} options={{
-             headerTitleStyle: {
-              color: 'white',
-            },
-            headerStyle: {
-              backgroundColor: '#4F81C7',
-            },
-          }}/>
-           <Stack.Screen name='Recursos' component={adicionar_Recursos} options={{
-             headerTitleStyle: {
-              color: 'white',
-            },
-            headerStyle: {
-              backgroundColor: '#4F81C7',
-            },
-          }}/>
-           <Stack.Screen name='Ideias' component={adicionar_Ideias} options={{
-             headerTitleStyle: {
-              color: 'white',
-            },
-            headerStyle: {
-              backgroundColor: '#4F81C7',
-            },
-          }}/>
-      </Stack.Navigator>
-    </NavigationContainer>
-    /*<NavigationContainer>
-      <Stack.Navigator>
+        }}
+        
+      />
         <Stack.Screen
-          name="Home"
-          component={MyTabs}
-          options={{ headerShown: false }}
+          name="Iniciativas"
+          component={adicionar_Iniciativas}
+          options={{
+            headerTitleStyle: {
+              color: "white",
+            },
+            headerStyle: {
+              backgroundColor: "#4F81C7",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Adicionar"
+          component={AdicionarLista}
+          options={{
+            headerTitleStyle: {
+              color: "white",
+            },
+            headerStyle: {
+              backgroundColor: "#4F81C7",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Novo evento"
+          component={Novo_Evento}
+          options={{
+            headerTitleStyle: {
+              color: "white",
+            },
+            headerStyle: {
+              backgroundColor: "#4F81C7",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Nova entidade"
+          component={Nova_Entidade}
+          options={{
+            headerTitleStyle: {
+              color: "white",
+            },
+            headerStyle: {
+              backgroundColor: "#4F81C7",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Participacao individual"
+          component={Participacao_individual}
+          options={{
+            headerTitleStyle: {
+              color: "white",
+            },
+            headerStyle: {
+              backgroundColor: "#4F81C7",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="setor publico"
+          component={setor_publico}
+          options={{
+            headerTitleStyle: {
+              color: "white",
+            },
+            headerStyle: {
+              backgroundColor: "#4F81C7",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="setor privado"
+          component={setor_privado}
+          options={{
+            headerTitleStyle: {
+              color: "white",
+            },
+            headerStyle: {
+              backgroundColor: "#4F81C7",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="terceiro setor"
+          component={terceiro_setor}
+          options={{
+            headerTitleStyle: {
+              color: "white",
+            },
+            headerStyle: {
+              backgroundColor: "#4F81C7",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="redes de entidades"
+          component={redes_entidades}
+          options={{
+            headerTitleStyle: {
+              color: "white",
+            },
+            headerStyle: {
+              backgroundColor: "#4F81C7",
+            },
+          }}
+        />
+
+        <Stack.Screen
+          name="Voluntarios"
+          component={adicionar_Voluntarios}
+          options={{
+            headerTitleStyle: {
+              color: "white",
+            },
+            headerStyle: {
+              backgroundColor: "#4F81C7",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Novo Recurso"
+          component={adicionar_Recursos}
+          options={{
+            headerTitleStyle: {
+              color: "white",
+            },
+            headerStyle: {
+              backgroundColor: "#4F81C7",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Ideias"
+          component={adicionar_Ideias}
+          options={{
+            headerTitleStyle: {
+              color: "white",
+            },
+            headerStyle: {
+              backgroundColor: "#4F81C7",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Check_mark"
+          component={checkmark_entidade}
+          options={{
+            headerTitleStyle: {
+              color: "white",
+            },
+            headerStyle: {
+              backgroundColor: "#4F81C7",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Pos registo"
+          component={Pos_registo}
+          options={{
+            headerTitleStyle: {
+              color: "white",
+            },
+            headerStyle: {
+              backgroundColor: "#4F81C7",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Mapa"
+          component={Mapa}
+          options={{
+            headerTitleStyle: {
+              color: "white",
+            },
+            headerStyle: {
+              backgroundColor: "#4F81C7",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="mais detalhes"
+          component={detalhes_entidade}
+          options={{
+            headerTitleStyle: {
+              color: "white",
+            },
+            headerStyle: {
+              backgroundColor: "#4F81C7",
+            },
+          }}
         />
       </Stack.Navigator>
-    </NavigationContainer>*/
+      
+    </NavigationContainer>
   );
 };
 export default App;
 
-/*export default class SplashScreen extends Component {
-  render() {
-    return (
-      <SplashScreenMask
-        imageSource={IMAGE}
-        navigationAction={() => this.props.navigation.navigate("Auth")}
-        backgroundStyle={styles.backgroundStyle}
-        duration={1000}
-      />
-    );
-  }
-}*/
 
-/*const styles = StyleSheet.create({
-  backgroundStyle: {
-    backgroundColor: "#fff",
-  },
-});*/

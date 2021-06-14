@@ -1,38 +1,21 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useState } from "react";
 import { StyleSheet, Text, View, TextInput } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { ListItem } from "react-native-elements";
-import { ScrollView } from "react-native";
 
 const list = [
   {
-    title: "participação individual",
-    component: "Participacao individual",
-  },
-  {
-    title: "Setor Público",
-    component: "setor publico",
-  },
-  {
-    title: "Setor Privado",
-    component: "setor privado",
-  },
-  {
-    title: "terceiro setor",
-    component: "terceiro setor",
-  },
-  {
-    title: "rede de entidades",
-    component: "rede de entidades",
+    title: "mais detalhes",
+    component: "mais detalhes",
   },
 ];
-export default function Nova_Entidade({ navigation }) {
-  const [input, setInput] = React.useState("");
 
+//import { Switch } from 'react-native-paper';
+
+export default function Pos_registo({ navigation }) {
   return (
-    <ScrollView>
-      <View style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.Imageinsert}>
         <LinearGradient
           colors={["#E3CEF6", "#CEF6EC"]}
@@ -47,7 +30,7 @@ export default function Nova_Entidade({ navigation }) {
           style={styles.box}
         />
       </View>
-      <Text style={styles.textitlefirst}> Designação* </Text>
+      <Text style={styles.textitlefirst}> Designação ou Nome * </Text>
       <StatusBar style="auto" />
       <TextInput
         style={styles.input}
@@ -57,25 +40,26 @@ export default function Nova_Entidade({ navigation }) {
         }}
         placeholder="inserir designação..."
       />
-      <View>
-        <Text style={styles.texttitlesecond}> Tipo de Edentidade* </Text>
+      <Text style={styles.textitlefirst}> TIPO DE ENTIDADE</Text>
+      <View style={styles.container}>
         {list.map((item, i) => (
           <ListItem
             key={i}
             bottomDivider
+            style={{ backgroundColor: 'undefined' }}
             button
             onPress={() => navigation.navigate(item.component)}
           >
-            <ListItem.Title style={styles.ListItem}>
-              {item.title}
-            </ListItem.Title>
-            <ListItem.Chevron />
+            <ListItem.Content >
+              <ListItem.Title style={styles.ListItem}>
+                {item.title}
+              </ListItem.Title>
+            </ListItem.Content>
+            <ListItem.Chevron style={styles.Chevron} />
           </ListItem>
         ))}
       </View>
     </View>
-    </ScrollView>
-    
   );
 }
 
@@ -83,22 +67,22 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#EEF5FF",
-    alignItems: "center",
-    justifyContent: "center",
+    paddingLeft: 10,
   },
-  content: {
-    textAlign: "center",
+  esq: {
+    textAlign: "left",
   },
 
   Imageinsert: {
-    paddingTop: 100,
+    paddingTop: -25,
     paddingHorizontal: 30,
   },
   box: {
     width: 300,
     height: 177,
     paddingTop: 1,
-    marginTop: -70,
+    marginTop: 20,
+    marginLeft: 15,
     borderRadius: 20,
   },
   button: {
@@ -122,13 +106,7 @@ const styles = StyleSheet.create({
     marginTop: 25,
     marginLeft: 0,
   },
-  texttitlesecond: {
-    fontSize: 25,
-    fontWeight: "bold",
-    paddingBottom: 10,
-    marginTop: 25,
-    marginLeft: 6,
-  },
+
   input: {
     backgroundColor: "white",
     fontSize: 16,
@@ -143,13 +121,32 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     borderColor: "#FFFFFF",
   },
-  texttitlesecond: {
-    fontSize: 25,
+  SafeAreaView: {
+    flex: 1,
+    alignItems: "center",
+    justifyContent: "center",
+    paddingTop: 40,
+    backgroundColor: "#ecf0f1",
+  },
+  paragraph: {
+    margin: 24,
+    fontSize: 18,
     fontWeight: "bold",
-    color: "gray",
-    paddingBottom: 7,
-    marginTop: 5,
-    marginLeft: 30,
-    paddingLeft: -5,
+    textAlign: "center",
+    color: "#34495e",
+  },
+  container1: {
+    flex: 1,
+    paddingTop: 30,
+    backgroundColor: "#ffffff",
+    padding: 16,
+  },
+  textStyle: {
+    marginTop: 10,
+  },
+  titleStyle: {
+    textAlign: "center",
+    fontSize: 20,
+    margin: 20,
   },
 });

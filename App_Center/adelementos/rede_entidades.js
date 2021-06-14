@@ -3,9 +3,11 @@ import { Text, View, Switch, StyleSheet } from "react-native";
 import { List } from "react-native-paper";
 import CustomMultiPicker from "react-native-multiple-select-list";
 
-const registar = {
-  1: "registar-me como voluntário",
-}
+const redeentidades = {
+  1: "GAL",
+  2: "DLBC", 
+  3: "associação de bens específicos",
+};
 const setoratividade = {
   1: "Agricultura",
   2: "Ambiente, Natureza e Clima", 
@@ -43,7 +45,7 @@ const areasinteresse = {
   11: "Geral",
 };
 
-export default function redes_entidades() {
+export default function setor_publico() {
   const [isEnabled1, setIsEnabled1] = useState(false);
   const alternarSwitch1 = () => {
     setIsEnabled1((previousState) => !previousState);
@@ -55,7 +57,7 @@ export default function redes_entidades() {
       <View>
         <View>
         <CustomMultiPicker 
-          options={registar}
+          options={redeentidades}
           search={false} // should show search bar?
           multiple={true} //
           returnValue={"label"} // label or value
@@ -73,27 +75,11 @@ export default function redes_entidades() {
           checkmar={"yellow"}
         />
         </View>
-        <View style={({ marginBottom: 28 }, { marginRight: 30 })}>
-          <View style={{ width: 270 }}>
-            <Text style={{ fontSize: 15, marginTop: 25, left: 18 }}>
-              {
-                "Encontro-me disponível para fazer voluntariado com regularidade"
-              }
-            </Text>
-          </View>
-          <Switch
-            style={{ marginTop: -25, paddingBottom: -3 }}
-            trackColor={{ false: "#808080", true: "#4F81C7" }}
-            thumbColor={!isEnabled1 ? "#ffffff" : "#E5E5EA"}
-            onValueChange={alternarSwitch1}
-            value={isEnabled1}
-          />
-        </View>
       </View>
 
       <List.AccordionGroup s>
         <Text style={styles.esq}>
-          <List.Accordion title="setor de atividade" id="1">
+          <List.Accordion title="setor de atividade" id="1" >
             <CustomMultiPicker 
           options={setoratividade}
           search={false} // should show search bar?

@@ -1,17 +1,10 @@
 import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
-import {
-  StyleSheet,
-  Text,
-  View,
-  TextInput,
-  Switch,
-  Button,
-} from "react-native";
+import { StyleSheet, Text, View, TextInput, Switch, Image} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { List } from "react-native-paper";
-
-
+import Carousel from "simple-carousel-react-native";
+import { ScrollView } from "react-native";
 //  import { Card, CardTitle, CardContent, CardAction, CardButton, CardImage } from 'react-native-material-cards'
 
 //import { Switch } from 'react-native-paper';
@@ -41,9 +34,9 @@ export default function Novo_Evento() {
     setIsEnabled4((previousState) => !previousState);
   };
 
-
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.ScrollView} >
+      <View style={styles.container}>
       <View style={styles.Imageinsert}>
         <LinearGradient
           colors={["#E3CEF6", "#CEF6EC"]}
@@ -95,9 +88,9 @@ export default function Novo_Evento() {
           </List.Accordion>
         </Text>
       </List.AccordionGroup>
-      
+
       <View>
-        <View style={({ marginBottom: 28 }, { marginRight: 30 })}>
+        <View style={{ marginBottom: 28 },{ marginRight: 30}}>
           <View style={{ width: 270 }}>
             <Text style={{ fontSize: 15, marginTop: 25, left: 18 }}>
               {"apresentar data/período"}
@@ -112,7 +105,7 @@ export default function Novo_Evento() {
           />
         </View>
 
-        <View style={({ marginBottom: 28 }, { marginRight: 30 })}>
+        <View style={{ marginBottom: 28 },{ marginRight: 30 }}>
           <View style={{ width: 270 }}>
             <Text style={{ fontSize: 15, marginTop: 25, left: 18 }}>
               {"convidar parceiros"}
@@ -127,15 +120,58 @@ export default function Novo_Evento() {
           />
         </View>
 
-        {shouldShow ? (
-        <View>
-        
-      </View>
-         ) : (
-          true
-        )}
+        {shouldShow ? <View>
 
-        <View style={({ marginBottom: 28 }, { marginRight: 30 })}>
+          <Carousel showBubbles={false} style={styles.tamcarrossel}>
+              <View style={styles.fundcarrosel}>
+                <Image
+                  style={styles.tam}
+                  source={require("../pic/evento.jpg")}
+                />
+                <Text style={{ alignSelf: "flex-start" }} style={styles.titulo}>
+                  Bailarico do bairro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  Aveiro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  10 Maio
+                </Text>
+              </View>
+              <View style={styles.fundcarrosel}>
+                <Image
+                  style={styles.tam}
+                  source={require("../pic/evento.jpg")}
+                />
+                <Text style={{ alignSelf: "flex-start" }} style={styles.titulo}>
+                  Bailarico do bairro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  Aveiro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  10 Maio
+                </Text>
+              </View>
+
+              <View style={styles.fundcarrosel}>
+                <Image
+                  style={styles.tam}
+                  source={require("../pic/evento.jpg")}
+                />
+                <Text style={{ alignSelf: "flex-start" }} style={styles.titulo}>
+                  Bailarico do bairro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  Aveiro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  10 Maio
+                </Text>
+              </View>
+            </Carousel>
+        </View> : false}
+        <View style={{ marginBottom: 28 },{ marginRight: 30 }}>
           <View style={{ width: 270 }}>
             <Text style={{ fontSize: 15, marginTop: 25, left: 18 }}>
               {"solicitar recursos"}
@@ -149,7 +185,7 @@ export default function Novo_Evento() {
             value={isEnabled3}
           />
         </View>
-        <View style={({ marginBottom: 28 }, { marginRight: 30 })}>
+        <View style={{ marginBottom: 28 },{ marginRight: 30 }}>
           <View style={{ width: 200 }}>
             <Text style={{ fontSize: 15, marginTop: 25, left: 18 }}>
               {"solicitar voluntários"}
@@ -165,6 +201,8 @@ export default function Novo_Evento() {
         </View>
       </View>
     </View>
+    </ScrollView>
+    
   );
 }
 
@@ -174,6 +212,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#EEF5FF",
     paddingLeft: 10,
   },
+  ScrollView:{
+    backgroundColor: "#EEF5FF",
+  }, 
   esq: {
     textAlign: "left",
   },
@@ -187,7 +228,7 @@ const styles = StyleSheet.create({
     height: 177,
     paddingTop: 1,
     marginTop: 20,
-    marginLeft: 15,
+    marginLeft:15,
     borderRadius: 20,
   },
   button: {
@@ -211,7 +252,7 @@ const styles = StyleSheet.create({
     marginTop: 25,
     marginLeft: 0,
   },
-
+ 
   input: {
     backgroundColor: "white",
     fontSize: 16,
@@ -226,4 +267,50 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     borderColor: "#FFFFFF",
   },
+  content: {
+    backgroundColor: "#EEF5FF",
+  },
+  ListItem: {
+    color: "black",
+  },
+  preto: {
+    color: "black",
+  },
+  back: {
+    backgroundColor: "#EEF5FF",
+  },
+  Chevron: {
+    tintColor: "#EEF5FF",
+  },
+  Text: {
+    marginTop: 20,
+  },
+  tam: {
+    width: 350,
+    height: 200,
+    borderRadius: 10,
+    marginTop:-45,
+  },
+  esp: {
+    marginTop: 15,
+    marginLeft: 20,
+    marginBottom: 0,
+    color: "black",
+  },
+
+  fundcarrosel: {
+    backgroundColor: "white",
+    borderRadius: 5,
+    paddingTop: 50,
+  },
+  titulo: {
+    fontSize: 20,
+    marginTop: 20,
+    marginLeft: 20,
+    color: "black",
+  },
+  tamcarrossel: {
+    height: 200,
+  },
+
 });
