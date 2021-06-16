@@ -1,15 +1,11 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { List } from "react-native-paper";
-import { StyleSheet, Text, View, Button, Header } from "react-native";
+import { StyleSheet, Text, View, Button, Image } from "react-native";
 import Carousel from "simple-carousel-react-native";
-
-export default function Home({navigation}) {
-
-  
+export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
-      
       <Text> Destaques</Text>
       <Button
         style={styles.button}
@@ -18,105 +14,315 @@ export default function Home({navigation}) {
       />
 
       <List.AccordionGroup style={styles.Accordion}>
-        <Text style={styles.esq}>
+        <Text style={styles.content}>
           <List.Accordion title="Iniciativas" id="0">
-            <Carousel color="#00FFFF" showScroll={true}>
-              <View>
-                <Text>Page 1</Text>
+            <Carousel showBubbles={false} style={styles.tamcarrossel}>
+              <View style={styles.fundcarrosel}>
+                <Image
+                  style={styles.tam}
+                  source={require("../pic/evento.jpg")}
+                />
+                <Text style={{ alignSelf: "flex-start" }} style={styles.titulo}>
+                  Bailarico do bairro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  Aveiro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  10 Maio
+                </Text>
+              </View>
+              <View style={styles.fundcarrosel}>
+                <Image
+                  style={styles.tam}
+                  source={require("../pic/evento.jpg")}
+                />
+                <Text style={{ alignSelf: "flex-start" }} style={styles.titulo}>
+                  Bailarico do bairro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  Aveiro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  10 Maio
+                </Text>
               </View>
 
-              <View>
-                <Text>Page 2</Text>
-              </View>
-
-              <View>
-                <Text>Page 3</Text>
+              <View style={styles.fundcarrosel}>
+                <Image
+                  style={styles.tam}
+                  source={require("../pic/evento.jpg")}
+                />
+                <Text style={{ alignSelf: "flex-start" }} style={styles.titulo}>
+                  Bailarico do bairro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  Aveiro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  10 Maio
+                </Text>
               </View>
             </Carousel>
           </List.Accordion>
         </Text>
-        <Text style={styles.esq}>
+        <Text style={styles.content}>
           <List.Accordion title="Eventos" id="1">
-            <Carousel color="#00FFFF" showScroll={true}>
-              <View>
-                <Text>Page 1</Text>
+            <Carousel showBubbles={false} style={styles.tamcarrossel}>
+              <View style={styles.fundcarrosel}>
+                <Image
+                  style={styles.tam}
+                  source={require("../pic/evento.jpg")}
+                />
+                <Text style={{ alignSelf: "flex-start" }} style={styles.titulo}>
+                  Bailarico do bairro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  Aveiro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  10 Maio
+                </Text>
+              </View>
+              <View style={styles.fundcarrosel}>
+                <Image
+                  style={styles.tam}
+                  source={require("../pic/evento.jpg")}
+                />
+                <Text style={{ alignSelf: "flex-start" }} style={styles.titulo}>
+                  Bailarico do bairro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  Aveiro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  10 Maio
+                </Text>
               </View>
 
-              <View>
-                <Text>Page 2</Text>
-              </View>
-
-              <View>
-                <Text>Page 3</Text>
+              <View style={styles.fundcarrosel}>
+                <Image
+                  style={styles.tam}
+                  source={require("../pic/evento.jpg")}
+                />
+                <Text style={{ alignSelf: "flex-start" }} style={styles.titulo}>
+                  Bailarico do bairro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  Aveiro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  10 Maio
+                </Text>
               </View>
             </Carousel>
           </List.Accordion>
         </Text>
-        <Text style={styles.esq}>
+        <Text style={styles.content}>
           <List.Accordion title="Entidades" id="2">
-            <Carousel color="#00FFFF" showScroll={true}>
-              <View>
-                <Text>Page 1</Text>
+            <Carousel showBubbles={false} style={styles.tamcarrossel}>
+              <View style={styles.fundcarrosel}>
+                <Image
+                  style={styles.tam}
+                  source={require("../pic/evento.jpg")}
+                />
+                <Text style={{ alignSelf: "flex-start" }} style={styles.titulo}>
+                  Bailarico do bairro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  Aveiro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  10 Maio
+                </Text>
+              </View>
+              <View style={styles.fundcarrosel}>
+                <Image
+                  style={styles.tam}
+                  source={require("../pic/evento.jpg")}
+                />
+                <Text style={{ alignSelf: "flex-start" }} style={styles.titulo}>
+                  Bailarico do bairro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  Aveiro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  10 Maio
+                </Text>
               </View>
 
-              <View>
-                <Text>Page 2</Text>
-              </View>
-
-              <View>
-                <Text>Page 3</Text>
+              <View style={styles.fundcarrosel}>
+                <Image
+                  style={styles.tam}
+                  source={require("../pic/evento.jpg")}
+                />
+                <Text style={{ alignSelf: "flex-start" }} style={styles.titulo}>
+                  Bailarico do bairro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  Aveiro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  10 Maio
+                </Text>
               </View>
             </Carousel>
           </List.Accordion>
         </Text>
-        <Text style={styles.esq}>
+        <Text style={styles.content}>
           <List.Accordion title="Voluntários" id="3">
-            <Carousel color="#00FFFF" showScroll={true}>
-              <View>
-                <Text>Page 1</Text>
+            <Carousel showBubbles={false} style={styles.tamcarrossel}>
+              <View style={styles.fundcarrosel}>
+                <Image
+                  style={styles.tam}
+                  source={require("../pic/evento.jpg")}
+                />
+                <Text style={{ alignSelf: "flex-start" }} style={styles.titulo}>
+                  Bailarico do bairro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  Aveiro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  10 Maio
+                </Text>
+              </View>
+              <View style={styles.fundcarrosel}>
+                <Image
+                  style={styles.tam}
+                  source={require("../pic/evento.jpg")}
+                />
+                <Text style={{ alignSelf: "flex-start" }} style={styles.titulo}>
+                  Bailarico do bairro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  Aveiro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  10 Maio
+                </Text>
               </View>
 
-              <View>
-                <Text>Page 2</Text>
-              </View>
-
-              <View>
-                <Text>Page 3</Text>
+              <View style={styles.fundcarrosel}>
+                <Image
+                  style={styles.tam}
+                  source={require("../pic/evento.jpg")}
+                />
+                <Text style={{ alignSelf: "flex-start" }} style={styles.titulo}>
+                  Bailarico do bairro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  Aveiro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  10 Maio
+                </Text>
               </View>
             </Carousel>
           </List.Accordion>
         </Text>
 
-        <Text style={styles.esq}>
+        <Text style={styles.content}>
           <List.Accordion title="Recursos" id="4">
-            <Carousel color="#00FFFF" showScroll={true}>
-              <View>
-                <Text>Page 1</Text>
+            <Carousel showBubbles={false} style={styles.tamcarrossel}>
+              <View style={styles.fundcarrosel}>
+                <Image
+                  style={styles.tam}
+                  source={require("../pic/evento.jpg")}
+                />
+                <Text style={{ alignSelf: "flex-start" }} style={styles.titulo}>
+                  Bailarico do bairro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  Aveiro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  10 Maio
+                </Text>
+              </View>
+              <View style={styles.fundcarrosel}>
+                <Image
+                  style={styles.tam}
+                  source={require("../pic/evento.jpg")}
+                />
+                <Text style={{ alignSelf: "flex-start" }} style={styles.titulo}>
+                  Bailarico do bairro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  Aveiro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  10 Maio
+                </Text>
               </View>
 
-              <View>
-                <Text>Page 2</Text>
-              </View>
-
-              <View>
-                <Text>Page 3</Text>
+              <View style={styles.fundcarrosel}>
+                <Image
+                  style={styles.tam}
+                  source={require("../pic/evento.jpg")}
+                />
+                <Text style={{ alignSelf: "flex-start" }} style={styles.titulo}>
+                  Bailarico do bairro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  Aveiro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  10 Maio
+                </Text>
               </View>
             </Carousel>
           </List.Accordion>
         </Text>
-        <Text style={styles.esq}>
+        <Text style={styles.content}>
           <List.Accordion title="Ideias" id="5">
-            <Carousel color="#00FFFF" showScroll={true}>
-              <View>
-                <Text>Page 1</Text>
+            <Carousel showBubbles={false} style={styles.tamcarrossel}>
+              <View style={styles.fundcarrosel}>
+                <Image
+                  style={styles.tam}
+                  source={require("../pic/evento.jpg")}
+                />
+                <Text style={{ alignSelf: "flex-start" }} style={styles.titulo}>
+                  Bailarico do bairro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  Aveiro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  10 Maio
+                </Text>
+              </View>
+              <View style={styles.fundcarrosel}>
+                <Image
+                  style={styles.tam}
+                  source={require("../pic/evento.jpg")}
+                />
+                <Text style={{ alignSelf: "flex-start" }} style={styles.titulo}>
+                  Bailarico do bairro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  Aveiro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  10 Maio
+                </Text>
               </View>
 
-              <View>
-                <Text>Page 2</Text>
-              </View>
-
-              <View>
-                <Text>Page 3</Text>
+              <View style={styles.fundcarrosel}>
+                <Image
+                  style={styles.tam}
+                  source={require("../pic/evento.jpg")}
+                />
+                <Text style={{ alignSelf: "flex-start" }} style={styles.titulo}>
+                  Bailarico do bairro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  Aveiro
+                </Text>
+                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                  10 Maio
+                </Text>
               </View>
             </Carousel>
           </List.Accordion>
@@ -151,5 +357,33 @@ const styles = StyleSheet.create({
   },
   Text: {
     marginTop: 20,
+  },
+  tam: {
+    marginTop: 0,
+    width: 350,
+    height: 200,
+    borderRadius: 10,
+  },
+  esp: {
+    marginTop: 15,
+    marginLeft: 20,
+    marginBottom: 0,
+    color: "black",
+  },
+
+  fundcarrosel: {
+    backgroundColor: "white",
+    borderRadius: 5,
+  },
+  titulo: {
+    fontSize: 20,
+    marginTop: 20,
+    marginLeft: 20,
+    color: "black",
+  },
+  tamcarrossel: {
+    height: 200,
+    marginBottom: -1,
+    paddingBottom: 0,
   },
 });
