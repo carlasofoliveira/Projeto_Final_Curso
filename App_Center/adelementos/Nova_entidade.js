@@ -31,7 +31,7 @@ export default function Nova_Entidade({ navigation }) {
   const [input, setInput] = React.useState("");
 
   return (
-    <ScrollView>
+    <ScrollView style={styles.scroll}>
       <View style={styles.container}>
       <View style={styles.Imageinsert}>
         <LinearGradient
@@ -60,13 +60,14 @@ export default function Nova_Entidade({ navigation }) {
       <View>
         <Text style={styles.texttitlesecond}> Tipo de Edentidade* </Text>
         {list.map((item, i) => (
-          <ListItem
+          <ListItem 
+          containerStyle={{backgroundColor:"#EEF5FF"}}
             key={i}
             bottomDivider
             button
             onPress={() => navigation.navigate(item.component)}
           >
-            <ListItem.Title style={styles.ListItem}>
+            <ListItem.Title >
               {item.title}
             </ListItem.Title>
             <ListItem.Chevron />
@@ -83,8 +84,9 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#EEF5FF",
-    alignItems: "center",
     justifyContent: "center",
+    paddingLeft: 10,
+    paddingRight: 6,
   },
   content: {
     textAlign: "center",
@@ -127,7 +129,7 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
     paddingBottom: 10,
     marginTop: 25,
-    marginLeft: 6,
+    marginLeft: 9,
   },
   input: {
     backgroundColor: "white",
@@ -137,9 +139,9 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 12,
     padding: 1,
-    paddingLeft: 25,
+    paddingLeft: 30,
     marginTop: -5,
-    marginRight: 16,
+    marginRight: 30,
     marginBottom: 15,
     borderColor: "#FFFFFF",
   },
@@ -152,4 +154,8 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     paddingLeft: -5,
   },
+  scroll:{
+    backgroundColor: "#EEF5FF",
+  },
+ 
 });

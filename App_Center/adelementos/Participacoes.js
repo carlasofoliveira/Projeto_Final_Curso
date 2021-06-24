@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, Switch, StyleSheet } from "react-native";
+import { Text, View, Switch, StyleSheet, Button } from "react-native";
 import { List } from "react-native-paper";
 import CustomMultiPicker from "react-native-multiple-select-list";
 import { ScrollView } from "react-native-gesture-handler";
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const registar = {
   1: "registar-me como voluntário",
@@ -142,6 +143,18 @@ export default function Participacao_individual() {
         </List.AccordionGroup>
       </ScrollView>
     </View>
+    <View style={styles.headerFooterStyle}>
+    <Button style={styles.buttonfooter}
+  icon={
+    <Icon
+      name="arrow-right"
+      size={15}
+      color="white"
+    />
+  }
+  title=""
+/>
+      </View>
     </ScrollView>
     
   );
@@ -214,5 +227,14 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     flexDirection: "row",
+  },
+  headerFooterStyle: {
+    width: '100%',
+    marginTop:415,
+    height: 45,
+    backgroundColor:"white",
+  },
+  buttonfooter:{
+
   },
 });

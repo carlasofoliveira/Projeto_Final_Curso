@@ -7,9 +7,10 @@ import {
   TextInput,
   Switch,
   Button,
+  ScrollView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { List } from "react-native-paper";
+import { List, Divider } from "react-native-paper";
 
 
 //  import { Card, CardTitle, CardContent, CardAction, CardButton, CardImage } from 'react-native-material-cards'
@@ -38,7 +39,8 @@ export default function adicionar_Iniciativas() {
 
 
   return (
-    <View style={styles.container}>
+    <ScrollView style={styles.scroll}>
+        <View style={styles.container}>
       <View style={styles.Imageinsert}>
         <LinearGradient
           colors={["#E3CEF6", "#CEF6EC"]}
@@ -63,7 +65,11 @@ export default function adicionar_Iniciativas() {
         }}
         placeholder="inserir designação..."
       />
-
+<View>
+    <Text></Text>
+    <Divider />
+    <Divider />
+  </View>
       <List.AccordionGroup style={styles.Accordion}>
         <Text style={styles.esq}>
           <List.Accordion title="Descrição" id="1">
@@ -77,6 +83,11 @@ export default function adicionar_Iniciativas() {
             />
           </List.Accordion>
         </Text>
+        <View>
+    <Text></Text>
+    <Divider />
+    <Divider />
+  </View>
         <Text style={styles.esq}>
           <List.Accordion title="Local" id="2">
             <TextInput
@@ -90,7 +101,11 @@ export default function adicionar_Iniciativas() {
           </List.Accordion>
         </Text>
       </List.AccordionGroup>
-      
+      <View>
+    <Text></Text>
+    <Divider />
+    <Divider />
+  </View>
       <View>
         <View style={({ marginBottom: 28 }, { marginRight: 30 })}>
           <View style={{ width: 270 }}>
@@ -146,6 +161,8 @@ export default function adicionar_Iniciativas() {
         </View>
       </View>
     </View>
+    </ScrollView>
+  
   );
 }
 
@@ -155,6 +172,9 @@ const styles = StyleSheet.create({
     backgroundColor: "#EEF5FF",
     paddingLeft: 10,
   },
+  scroll:{
+    backgroundColor: "#EEF5FF",
+  }, 
   esq: {
     textAlign: "left",
   },

@@ -30,6 +30,8 @@ import entrar_criar from "./adelementos/entrar_criar";
 import
  MaterialCommunityIcons
 from 'react-native-vector-icons/MaterialCommunityIcons';
+import { Button } from "react-native-elements/dist/buttons/Button";
+
 
 
 
@@ -46,8 +48,8 @@ function getHeaderTitle(route) {
   const routeName = getFocusedRouteNameFromRoute(route) ?? 'Feed';
 
   switch (routeName) {
-    case 'Inicio':
-      return 'Inicio';
+    case 'Home':
+      return 'Home';
     case 'Ideia':
       return 'Ideia';
     case 'Adicionar':
@@ -65,10 +67,12 @@ function AdicionarTabNavigator({ navigation, route }) {
   React.useLayoutEffect(() => {
     navigation.setOptions({ headerTitle: getHeaderTitle(route) });
   }, [navigation, route]);
+
+  
   return (
     <Tab.Navigator>
       <Tab.Screen
-        name="Inicio"
+        name="Home"
         component={Home}
         styles={{ backgroundColor: "#FFFFFF" }}
         options={{
@@ -84,14 +88,13 @@ function AdicionarTabNavigator({ navigation, route }) {
       />
       <Tab.Screen name="Ideia" component={Ideias} options={{
           tabBarLabel: 'ideia',
-          tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name=""
-              color={color}
-              size={size}
-            />
-          ),
-        }}  />
+          headerRight: () =>(
+            <Button>
+              
+            </Button>
+                        ),
+          }}
+        />
       <Tab.Screen name="Adicionar" component={AdicionarLista} options={{
           tabBarLabel: 'Adicionar',
           tabBarIcon: ({ color, size }) => (
@@ -129,6 +132,8 @@ function AdicionarTabNavigator({ navigation, route }) {
 }
 
 const App = () => {
+  
+
   return (
     <NavigationContainer>
       <Stack.Navigator>
@@ -136,9 +141,8 @@ const App = () => {
         name="Home"
         component={AdicionarTabNavigator}
         options={{
-          title: "Home",
           headerTitleStyle: {
-            color: "#fff",
+            color: "white",
           },
           headerStyle: {
             backgroundColor: "#4F81C7",

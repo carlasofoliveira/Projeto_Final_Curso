@@ -32,7 +32,8 @@ export default AdicionarLista = ({ navigation }) => {
   return (
     <View style={styles.container}>
       {list.map((item, i) => (
-        <ListItem
+        <ListItem 
+        containerStyle={{backgroundColor:"#EEF5FF"}}
           key={i}
           bottomDivider
           style={{backgroundColor:'undefined'}}
@@ -42,16 +43,14 @@ export default AdicionarLista = ({ navigation }) => {
           }
         >
           <ListItem.Content>
-            <ListItem.Title style={styles.ListItem}>
+            <ListItem.Title >
               {item.title}
             </ListItem.Title>
           </ListItem.Content>
           <ListItem.Chevron  />
         </ListItem>
       ))}
-      <View>
-    
-      </View>
+      
     </View>
   );
 };
@@ -66,9 +65,7 @@ const styles = StyleSheet.create({
   content:{
     backgroundColor: "#EEF5FF",
   },
-  ListItem: {
-    color: "#345481",
-  },
+  
   back: {
     backgroundColor: "#EEF5FF",
   },

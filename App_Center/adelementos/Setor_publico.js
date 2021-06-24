@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Text, View, Switch, StyleSheet } from "react-native";
+import { Text, View, Switch, StyleSheet, Button } from "react-native";
 import { List } from "react-native-paper";
 import CustomMultiPicker from "react-native-multiple-select-list";
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const entidadespublicas = {
   1: "município",
@@ -127,6 +128,18 @@ export default function setor_publico() {
           </List.Accordion>
         </Text>
       </List.AccordionGroup>
+      <View style={styles.headerFooterStyle}>
+    <Button style={styles.buttonfooter}
+  icon={
+    <Icon
+      name="arrow-right"
+      size={15}
+      color="white"
+    />
+  }
+  title=""
+/>
+      </View>
     </View>
   );
 }
@@ -197,5 +210,10 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     flexDirection: "row",
   },
-  
+  headerFooterStyle: {
+    width: '100%',
+    marginTop:315,
+    height: 45,
+    backgroundColor:"white",
+  },
 });

@@ -19,11 +19,7 @@ export default function checkmark_entidade({navigation}) {
   return (
     <View style={styles.container}>
 
-<Button
-        title="Entidade guardada com sucesso!"
-        onPress={() => navigation.navigate('Pos registo')}
-      />
-      
+
     </View>
   );
 

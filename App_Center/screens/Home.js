@@ -1,10 +1,15 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import { List } from "react-native-paper";
+import { List,} from "react-native-paper";
 import { StyleSheet, Text, View, Button, Image } from "react-native";
 import Carousel from "simple-carousel-react-native";
+
+
 export default function Home({ navigation }) {
+  
+
   return (
+    
     <View style={styles.container}>
       <Text> Destaques</Text>
       <Button
