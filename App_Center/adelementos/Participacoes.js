@@ -1,9 +1,12 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, Switch, StyleSheet, Button } from "react-native";
-import { List } from "react-native-paper";
+import { List, IconButton, Colors  } from "react-native-paper";
 import CustomMultiPicker from "react-native-multiple-select-list";
 import { ScrollView } from "react-native-gesture-handler";
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon from '@mdi/react';
+import { mdiAccount } from '@mdi/js'
+//import Icon from "react-native-vector-icons/FontAwesome";
+
 
 const registar = {
   1: "registar-me como voluntário",
@@ -52,52 +55,14 @@ export default function Participacao_individual() {
   };
 
   return (
-    <ScrollView style={styles.scroll}>
-      <View style={styles.container}>
-      <View>
-        <View>
-          <CustomMultiPicker
-            options={registar}
-            search={false} // should show search bar?
-            multiple={true} //
-            returnValue={"label"} // label or value
-            callback={(res) => {
-              console.log(res);
-            }} // callback, array of selected items
-            rowBackgroundColor={"#97C2FF"}
-            rowHeight={36}
-            rowRadius={11.55}
-            iconColor={"blue"}
-            iconSize={30}
-            selectedIconName={"ios-checkmark-circle-outline"}
-            unselectedIconName={"ios-radio-button-off-outline"}
-            selected={"none"} // list of options which are selected by default
-            checkmar={"yellow"}
-          />
-        </View>
-        <View style={({ marginBottom: 28 }, { marginRight: 30 })}>
-          <View style={{ width: 270 }}>
-            <Text style={{ fontSize: 15, marginTop: 25, left: 18 }}>
-              {
-                "Encontro-me disponível para fazer voluntariado com regularidade"
-              }
-            </Text>
-          </View>
-          <Switch
-            style={{ marginTop: -25, paddingBottom: -3 }}
-            trackColor={{ false: "#808080", true: "#4F81C7" }}
-            thumbColor={!isEnabled1 ? "#ffffff" : "#E5E5EA"}
-            onValueChange={alternarSwitch1}
-            value={isEnabled1}
-          />
-        </View>
-      </View>
+    <ScrollView>
+       <View style={styles.container}>
       <ScrollView>
-        <List.AccordionGroup>
-          <Text style={styles.esq}>
-            <List.Accordion title="setor de atividade" id="1">
+        <View>
+          <View>
+            <View>
               <CustomMultiPicker
-                options={setoratividade}
+                options={registar}
                 search={false} // should show search bar?
                 multiple={true} //
                 returnValue={"label"} // label or value
@@ -112,51 +77,91 @@ export default function Participacao_individual() {
                 selectedIconName={"ios-checkmark-circle-outline"}
                 unselectedIconName={"ios-radio-button-off-outline"}
                 selected={"none"} // list of options which are selected by default
-                scrollViewHeight={500}
                 checkmar={"yellow"}
               />
-            </List.Accordion>
-          </Text>
+            </View>
+            <View style={({ marginBottom: 28 }, { marginRight: 30 })}>
+              <View style={{ width: 270 }}>
+                <Text style={{ fontSize: 15, marginTop: 25, left: 18 }}>
+                  {
+                    "Encontro-me disponível para fazer voluntariado com regularidade"
+                  }
+                </Text>
+              </View>
+              <Switch
+                style={{ marginTop: -25, paddingBottom: -3 }}
+                trackColor={{ false: "#808080", true: "#4F81C7" }}
+                thumbColor={!isEnabled1 ? "#ffffff" : "#E5E5EA"}
+                onValueChange={alternarSwitch1}
+                value={isEnabled1}
+              />
+            </View>
+          </View>
 
-          <Text style={styles.esq}>
-            <List.Accordion title="áreas de interesse" id="2">
-              <CustomMultiPicker
-                options={areasinteresse}
-                search={false} // should show search bar?
-                multiple={true} //
-                returnValue={"label"} // label or value
-                callback={(res) => {
-                  console.log(res);
-                }} // callback, array of selected items
-                rowBackgroundColor={"#97C2FF"}
-                rowHeight={36}
-                rowRadius={11.55}
-                iconColor={"blue"}
-                iconSize={30}
-                selectedIconName={"ios-checkmark-circle-outline"}
-                unselectedIconName={"ios-radio-button-off-outline"}
-                selected={"none"} // list of options which are selected by default
-                checkmar={"yellow"}
-              />
-            </List.Accordion>
-          </Text>
-        </List.AccordionGroup>
+          <List.AccordionGroup>
+            <Text style={styles.esq}>
+              <List.Accordion title="setor de atividade" id="1">
+                <CustomMultiPicker
+                  options={setoratividade}
+                  search={false} // should show search bar?
+                  multiple={true} //
+                  returnValue={"label"} // label or value
+                  callback={(res) => {
+                    console.log(res);
+                  }} // callback, array of selected items
+                  rowBackgroundColor={"#97C2FF"}
+                  rowHeight={36}
+                  rowRadius={11.55}
+                  iconColor={"blue"}
+                  iconSize={30}
+                  selectedIconName={"ios-checkmark-circle-outline"}
+                  unselectedIconName={"ios-radio-button-off-outline"}
+                  selected={"none"} // list of options which are selected by default
+                  scrollViewHeight={500}
+                  checkmar={"yellow"}
+                />
+              </List.Accordion>
+            </Text>
+
+            <Text style={styles.esq}>
+              <List.Accordion title="áreas de interesse" id="2">
+                <CustomMultiPicker
+                  options={areasinteresse}
+                  search={false} // should show search bar?
+                  multiple={true} //
+                  returnValue={"label"} // label or value
+                  callback={(res) => {
+                    console.log(res);
+                  }} // callback, array of selected items
+                  rowBackgroundColor={"#97C2FF"}
+                  rowHeight={36}
+                  rowRadius={11.55}
+                  iconColor={"blue"}
+                  iconSize={30}
+                  selectedIconName={"ios-checkmark-circle-outline"}
+                  unselectedIconName={"ios-radio-button-off-outline"}
+                  selected={"none"} // list of options which are selected by default
+                  checkmar={"yellow"}
+                />
+              </List.Accordion>
+            </Text>
+          </List.AccordionGroup>
+        </View>
       </ScrollView>
-    </View>
-    <View style={styles.headerFooterStyle}>
-    <Button style={styles.buttonfooter}
-  icon={
-    <Icon
-      name="arrow-right"
-      size={15}
-      color="white"
-    />
-  }
-  title=""
-/>
+
+      <View style={styles.headerFooterStyle}>
+       
+       <IconButton style={styles.iconbutton}
+       icon="check-circle"
+       color={"gray"}
+       size={50}
+       onPress={() => console.log('Pressed')}
+     />
+      
       </View>
+    </View>
     </ScrollView>
-    
+   
   );
 }
 
@@ -169,7 +174,7 @@ const styles = StyleSheet.create({
   esq: {
     textAlign: "left",
   },
-  scroll:{
+  scroll: {
     backgroundColor: "#EEF5FF",
   },
   Imageinsert: {
@@ -229,12 +234,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   headerFooterStyle: {
-    width: '100%',
-    marginTop:415,
-    height: 45,
-    backgroundColor:"white",
+    width:700,
+    marginTop:400,
+    height: 51,
+    marginLeft:-9,
+    backgroundColor: "white",
+    
   },
-  buttonfooter:{
-
+  iconbutton: {
+    marginLeft:150,
+    marginTop:-15,
   },
 });

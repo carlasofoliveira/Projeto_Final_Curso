@@ -3,6 +3,7 @@ import { Text, View, Switch, StyleSheet, Button } from "react-native";
 import { List } from "react-native-paper";
 import CustomMultiPicker from "react-native-multiple-select-list";
 import Icon from 'react-native-vector-icons/FontAwesome';
+import { ScrollView } from "react-native";
 
 const entidadespublicas = {
   1: "município",
@@ -57,7 +58,8 @@ export default function setor_publico() {
 
   return (
     <View style={styles.container}>
-      <View>
+      <ScrollView>
+         <View>
         <View>
         <CustomMultiPicker 
           options={entidadespublicas}
@@ -79,10 +81,14 @@ export default function setor_publico() {
         />
         </View>
       </View>
-
-      <List.AccordionGroup s>
-        <Text style={styles.esq}>
-          <List.Accordion title="setor de atividade" id="1" >
+<ScrollView>
+  
+</ScrollView>
+      <List.AccordionGroup >
+       
+        <ScrollView>
+           <Text style={styles.esq}>
+          <List.Accordion title="setor de atividade" id="1" style={styles.listtext}>
             <CustomMultiPicker 
           options={setoratividade}
           search={false} // should show search bar?
@@ -104,7 +110,7 @@ export default function setor_publico() {
         />
           </List.Accordion>
         </Text>
-        
+        </ScrollView>
         <Text style={styles.esq}>
           <List.Accordion title="áreas de interesse" id="2">
           <CustomMultiPicker 
@@ -127,7 +133,7 @@ export default function setor_publico() {
         />
           </List.Accordion>
         </Text>
-      </List.AccordionGroup>
+      </List.AccordionGroup> 
       <View style={styles.headerFooterStyle}>
     <Button style={styles.buttonfooter}
   icon={
@@ -140,6 +146,9 @@ export default function setor_publico() {
   title=""
 />
       </View>
+      </ScrollView>
+     
+     
     </View>
   );
 }
@@ -152,6 +161,7 @@ const styles = StyleSheet.create({
   },
   esq: {
     textAlign: "left",
+  
   },
 
   Imageinsert: {
@@ -215,5 +225,8 @@ const styles = StyleSheet.create({
     marginTop:315,
     height: 45,
     backgroundColor:"white",
+  },
+  listtext:{
+color:"yellow",
   },
 });

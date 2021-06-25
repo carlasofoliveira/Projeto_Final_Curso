@@ -11,6 +11,7 @@ export default function Home({ navigation }) {
   return (
     
     <View style={styles.container}>
+      
       <Text> Destaques</Text>
       <Button
         style={styles.button}

@@ -72,6 +72,7 @@ function AdicionarTabNavigator({ navigation, route }) {
   return (
     <Tab.Navigator>
       <Tab.Screen
+      
         name="Home"
         component={Home}
         styles={{ backgroundColor: "#FFFFFF" }}
@@ -83,16 +84,19 @@ function AdicionarTabNavigator({ navigation, route }) {
               color={color}
               size={size}
             />
+            
           ),
         }} 
       />
       <Tab.Screen name="Ideia" component={Ideias} options={{
           tabBarLabel: 'ideia',
-          headerRight: () =>(
-            <Button>
-              
-            </Button>
-                        ),
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons
+              name="lightbulb"
+              color={color}
+              size={size}
+            />
+          ),
           }}
         />
       <Tab.Screen name="Adicionar" component={AdicionarLista} options={{
@@ -106,10 +110,10 @@ function AdicionarTabNavigator({ navigation, route }) {
           ),
         }} />
       <Tab.Screen name="Guardados" component={Guardados} options={{
-          tabBarLabel: 'Guardar',
+          tabBarLabel: 'Guardados',
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
-              name="checkbox-marked"
+              name="bookmark"
               color={color}
               size={size}
             />
