@@ -1,6 +1,6 @@
 import "react-native-gesture-handler";
 import React from "react";
-import { getFocusedRouteNameFromRoute } from '@react-navigation/native';
+import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./screens/Home";
@@ -27,17 +27,9 @@ import checkmark_entidade from "./adelementos/checkmark_perfil";
 import Pos_registo from "./adelementos/Registo_feito";
 import detalhes_entidade from "./adelementos/detalhes_entidade";
 import entrar_criar from "./adelementos/entrar_criar";
-import
- MaterialCommunityIcons
-from 'react-native-vector-icons/MaterialCommunityIcons';
-import { Button } from "react-native-elements/dist/buttons/Button";
 import Login from "./adelementos/Login";
-
-
-
-
-
-
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
+import { Button, TouchableOpacity, Image, StyleSheet } from "react-native";
 
 //import SimpleImagePicker from "./adelementos/SimpleImagePicker";
 //import imagepickerground from "./adelementos/SimpleImagePicker";
@@ -49,21 +41,21 @@ function getHeaderTitle(route) {
   // If the focused route is not found, we need to assume it's the initial screen
   // This can happen during if there hasn't been any navigation inside the screen
   // In our case, it's "Feed" as that's the first screen inside the navigator
-  const routeName = getFocusedRouteNameFromRoute(route) ?? 'Feed';
+  const routeName = getFocusedRouteNameFromRoute(route) ?? "Feed";
 
   switch (routeName) {
-    case 'Home':
-      return 'Home';
-    case 'Ideia':
-      return 'Ideia';
-    case 'Adicionar':
-      return 'Adicionar';
-      case 'Guardados':
-      return 'Guardados';
-      case 'Notificacoes':
-        return 'Notificações';
+    case "Inicio":
+      return "Inicio";
+    case "Ideia":
+      return "Ideia";
+    case "Adicionar":
+      return "Adicionar";
+    case "Guardados":
+      return "Guardados";
+    case "Notificacoes":
+      return "Notificações";
     default:
-      return 'Nome Indeterminado';
+      return "Nome Indeterminado";
   }
 }
 
@@ -71,29 +63,24 @@ function AdicionarTabNavigator({ navigation, route }) {
   React.useLayoutEffect(() => {
     navigation.setOptions({ headerTitle: getHeaderTitle(route) });
   }, [navigation, route]);
-
-  
   return (
     <Tab.Navigator>
       <Tab.Screen
-      
-        name="Home"
+        name="Inicio"
         component={Home}
         styles={{ backgroundColor: "#FFFFFF" }}
         options={{
-          tabBarLabel: 'Inicio',
+          tabBarLabel: "Inicio",
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="home"
-              color={color}
-              size={size}
-            />
-            
+            <MaterialCommunityIcons name="home" color={color} size={size} />
           ),
-        }} 
+        }}
       />
-      <Tab.Screen name="Ideia" component={Ideias} options={{
-          tabBarLabel: 'ideia',
+      <Tab.Screen
+        name="Ideia"
+        component={Ideias}
+        options={{
+          tabBarLabel: "ideia",
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
               name="lightbulb"
@@ -101,20 +88,23 @@ function AdicionarTabNavigator({ navigation, route }) {
               size={size}
             />
           ),
-          }}
-        />
-      <Tab.Screen name="Adicionar" component={AdicionarLista} options={{
-          tabBarLabel: 'Adicionar',
+        }}
+      />
+      <Tab.Screen
+        name="Adicionar"
+        component={AdicionarLista}
+        options={{
+          tabBarLabel: "Adicionar",
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="plus"
-              color={color}
-              size={size}
-            />
+            <MaterialCommunityIcons name="plus" color={color} size={size} />
           ),
-        }} />
-      <Tab.Screen name="Guardados" component={Guardados} options={{
-          tabBarLabel: 'Guardados',
+        }}
+      />
+      <Tab.Screen
+        name="Guardados"
+        component={Guardados}
+        options={{
+          tabBarLabel: "Guardados",
           tabBarIcon: ({ color, size }) => (
             <MaterialCommunityIcons
               name="bookmark"
@@ -122,40 +112,46 @@ function AdicionarTabNavigator({ navigation, route }) {
               size={size}
             />
           ),
-        }}/>
-      <Tab.Screen name="Notificacoes" component={Notificacoes} options={{
-          tabBarLabel: 'Notificações',
+        }}
+      />
+      <Tab.Screen
+        name="Notificacoes"
+        component={Notificacoes}
+        options={{
+          tabBarLabel: "Notificações",
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="bell"
-              color={color}
-              size={size}
-            />
+            <MaterialCommunityIcons name="bell" color={color} size={size} />
           ),
-        }}/>
+        }}
+      />
       <Tab.Screen name="entrar criar" component={entrar_criar} />
     </Tab.Navigator>
   );
 }
 
-const App = ({navigation}) => {
-  
-
+const App = () => {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-      <Stack.Screen
-        name="Home"
-        component={AdicionarTabNavigator}
-        options={{
-          headerStyle: {
-            backgroundColor: "#4F81C7"},
+        <Stack.Screen
+          name="Home"
+          component={AdicionarTabNavigator}
+          options={{
+            title: "Home",
             headerTitleStyle: {
-              color: "white",
+              color: "#fff",
             },
-        }}
-        
-      />
+            headerStyle: {
+              backgroundColor: "#4F81C7",
+            },
+            headerRight: () =>
+            <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
+              <Image source={require('./assets/cog-outline.png')}
+                     style={styles.settingsIcon} />
+            </TouchableOpacity>,
+            
+          }}
+        />
         <Stack.Screen
           name="Iniciativas"
           component={adicionar_Iniciativas}
@@ -166,18 +162,23 @@ const App = ({navigation}) => {
             headerStyle: {
               backgroundColor: "#4F81C7",
             },
+            /*headerright:
+              <Button
+              title = "Test"
+              onPress = {() => this.params.handleSave() } />*/
+            
           }}
         />
         <Stack.Screen
           name="Adicionar"
           component={AdicionarLista}
           options={{
+            headerTitleStyle: {
+              color: "white",
+            },
             headerStyle: {
-              backgroundColor: "#4F81C7"},
-              headerTitleStyle: {
-                color: "white",
-              },
-             
+              backgroundColor: "#4F81C7",
+            },
           }}
         />
         <Stack.Screen
@@ -299,9 +300,6 @@ const App = ({navigation}) => {
             headerStyle: {
               backgroundColor: "#4F81C7",
             },
-            headerLeft: () => (
-              <Button onPress={() => navigation.goBack()} title="Back" />
-            ),
           }}
         />
         <Stack.Screen
@@ -338,7 +336,6 @@ const App = ({navigation}) => {
             headerStyle: {
               backgroundColor: "#4F81C7",
             },
-            
           }}
         />
         <Stack.Screen
@@ -353,8 +350,19 @@ const App = ({navigation}) => {
             },
           }}
         />
-      </Stack.Navigator>
-      <Stack.Screen
+        <Stack.Screen
+          name="Entrar Criar"
+          component={entrar_criar}
+          options={{
+            headerTitleStyle: {
+              color: "white",
+            },
+            headerStyle: {
+              backgroundColor: "#4F81C7",
+            },
+          }}
+        />
+        <Stack.Screen
           name="Login"
           component={Login}
           options={{
@@ -366,9 +374,17 @@ const App = ({navigation}) => {
             },
           }}
         />
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };
+const styles = StyleSheet.create({
+  settingsIcon: {
+    height: 20,
+    width: 20,
+  },
+  
+  
+});
+
 export default App;
-
-
