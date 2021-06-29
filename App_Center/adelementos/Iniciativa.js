@@ -10,8 +10,12 @@ import {
   ScrollView,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { List, Divider } from "react-native-paper";
+import { List, Divider,IconButton } from "react-native-paper";
 
+
+
+import Icon from "@mdi/react";
+import { mdiAccount } from "@mdi/js";
 
 //  import { Card, CardTitle, CardContent, CardAction, CardButton, CardImage } from 'react-native-material-cards'
 
@@ -160,6 +164,15 @@ export default function adicionar_Iniciativas() {
           />
         </View>
       </View>
+      <View style={styles.headerFooterStyle}>
+          <IconButton
+            style={styles.iconbutton}
+            icon="check-circle"
+            color={"gray"}
+            size={45}
+            onPress={() => console.log("Pressed")}
+          />
+        </View>
     </View>
     </ScrollView>
   
@@ -174,6 +187,8 @@ const styles = StyleSheet.create({
   },
   scroll:{
     backgroundColor: "#EEF5FF",
+    flexGrow: 1,
+    height:'100%',
   }, 
   esq: {
     textAlign: "left",
@@ -226,5 +241,17 @@ const styles = StyleSheet.create({
     marginRight: 16,
     marginBottom: 15,
     borderColor: "#FFFFFF",
+  },
+  headerFooterStyle: {
+    width: 700,
+    marginTop: 600,
+    height: 51,
+    marginLeft: -9,
+    backgroundColor: "white",
+  },
+  iconbutton: {
+    marginLeft: 170,
+    marginTop: -10,
+    position: "absolute",
   },
 });

@@ -38,7 +38,7 @@ export default AdicionarLista = ({ navigation }) => {
           key={i}
           bottomDivider
           style={{backgroundColor:'undefined'}}
-          style={{ marginBottom: 15, paddingBottom:-5}}
+          style={{ marginBottom: 9, paddingTop:-8, marginStart:15, marginTop:5}}
           button
           onPress={() =>
             navigation.navigate(item.component)

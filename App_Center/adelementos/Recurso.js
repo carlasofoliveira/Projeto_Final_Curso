@@ -245,7 +245,7 @@ const styles = StyleSheet.create({
   },
   headerFooterStyle: {
     width: 700,
-    marginTop: 400,
+    marginTop: 500,
     height: 51,
     marginLeft: -9,
     backgroundColor: "white",
