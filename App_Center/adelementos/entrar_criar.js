@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
-import { List } from "react-native-paper";
 import { StyleSheet, Text, View, Button } from "react-native";
+
 //import Carousel from "simple-carousel-react-native";
 //import Divider from 'rn-dividers';
 import { SocialIcon } from "react-native-elements";
@@ -10,13 +10,14 @@ export default function registo({ navigation }) {
   return (
     <View style={styles.container}>
       <View style={styles.buttonContainer}>
-        <Button title="Entrar" />
+        <Button title="Entrar" onPress={() => navigation.navigate("Login")} />
       </View>
+
       <View style={styles.buttonContainer1}>
-        <Button title="Criar" />
+        <Button title="Criar" onPress={() => navigation.navigate("Login")} />
       </View>
       <View>
-      <SocialIcon
+        <SocialIcon
           style={styles.buttonFacebook}
           title="Sign In With Facebook"
           button
@@ -42,9 +43,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#4F81C7",
   },
   buttonContainer: {
+    backgroundColor: "white",
+    color: "#4F81C7",
     width: 130,
     height: 36,
-    borderRadius: 50,
+    borderRadius: 25,
     paddingLeft: 25,
     marginRight: 15,
     marginTop: -250,

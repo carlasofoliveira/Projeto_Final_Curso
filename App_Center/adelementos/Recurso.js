@@ -2,10 +2,12 @@ import { StatusBar } from "expo-status-bar";
 import React, { useState } from "react";
 import { StyleSheet, Text, View, TextInput, Switch } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { List } from "react-native-paper";
+import { List, Divider, IconButton } from "react-native-paper";
 import CustomMultiPicker from "react-native-multiple-select-list";
-import { Divider } from "react-native-elements";
 import { ScrollView } from "react-native-gesture-handler";
+
+import Icon from "@mdi/react";
+import { mdiAccount } from "@mdi/js";
 
 //  import { Card, CardTitle, CardContent, CardAction, CardButton, CardImage } from 'react-native-material-cards'
 
@@ -49,6 +51,7 @@ export default function Novo_Evento() {
   };
 
   return (
+  <ScrollView>
     <View style={styles.container}>
       <View style={styles.Imageinsert}>
         <LinearGradient
@@ -79,7 +82,7 @@ export default function Novo_Evento() {
         <View style={({ marginBottom: 28 }, { marginRight: 30 })}>
           <View style={{ width: 270 }}>
             <Text style={{ fontSize: 15, marginTop: 25, left: 18 }}>
-              {"apresentar data/período"}
+              {"a oferecer"}
             </Text>
           </View>
           <Switch
@@ -94,7 +97,7 @@ export default function Novo_Evento() {
         <View style={({ marginBottom: 28 }, { marginRight: 30 })}>
           <View style={{ width: 270 }}>
             <Text style={{ fontSize: 15, marginTop: 25, left: 18 }}>
-              {"convidar parceiros"}
+              {"a procurar"}
             </Text>
           </View>
           <Switch
@@ -106,8 +109,7 @@ export default function Novo_Evento() {
           />
         </View>
       </View>
-      
-      
+
       <View>
         <List.AccordionGroup style={styles.Accordion}>
           <Text style={styles.esq}>
@@ -123,7 +125,8 @@ export default function Novo_Evento() {
             </List.Accordion>
           </Text>
         </List.AccordionGroup>
-
+        <Divider />
+        <Divider />
         <List.AccordionGroup>
           <Text style={styles.esq}>
             <List.Accordion title="condições de utilização" id="2">
@@ -138,36 +141,47 @@ export default function Novo_Evento() {
             </List.Accordion>
           </Text>
         </List.AccordionGroup>
-<ScrollView>
-  <List.AccordionGroup>
-          <Text style={styles.esq}>
-            <List.Accordion title="setor de atividade" id="1">
-              <CustomMultiPicker
-                options={setoratividade}
-                search={false} // should show search bar?
-                multiple={true} //
-                returnValue={"label"} // label or value
-                callback={(res) => {
-                  console.log(res);
-                }} // callback, array of selected items
-                rowBackgroundColor={"#97C2FF"}
-                rowHeight={36}
-                rowRadius={11.55}
-                iconColor={"blue"}
-                iconSize={30}
-                selectedIconName={"ios-checkmark-circle-outline"}
-                unselectedIconName={"ios-radio-button-off-outline"}
-                selected={"none"} // list of options which are selected by default
-                scrollViewHeight={500}
-                checkmar={"yellow"}
-              />
-            </List.Accordion>
-          </Text>
-        </List.AccordionGroup>
-</ScrollView>
+        <Divider />
+        <Divider />
         
+          <List.AccordionGroup>
+            <Text style={styles.esq}>
+              <List.Accordion title="setor de atividade" id="1">
+                <CustomMultiPicker
+                  options={setoratividade}
+                  search={false} // should show search bar?
+                  multiple={true} //
+                  returnValue={"label"} // label or value
+                  callback={(res) => {
+                    console.log(res);
+                  }} // callback, array of selected items
+                  rowBackgroundColor={"#97C2FF"}
+                  rowHeight={36}
+                  rowRadius={11.55}
+                  iconColor={"blue"}
+                  iconSize={30}
+                  selectedIconName={"ios-checkmark-circle-outline"}
+                  unselectedIconName={"ios-radio-button-off-outline"}
+                  selected={"none"} // list of options which are selected by default
+                  scrollViewHeight={1000}
+                  checkmar={"yellow"}
+                />
+              </List.Accordion>
+            </Text>
+          </List.AccordionGroup>
+      
+        <View style={styles.headerFooterStyle}>
+          <IconButton
+            style={styles.iconbutton}
+            icon="check-circle"
+            color={"gray"}
+            size={45}
+            onPress={() => console.log("Pressed")}
+          />
+        </View>
       </View>
-    </View>
+    </View> 
+     </ScrollView>
   );
 }
 
@@ -228,5 +242,17 @@ const styles = StyleSheet.create({
     marginRight: 16,
     marginBottom: 15,
     borderColor: "#FFFFFF",
+  },
+  headerFooterStyle: {
+    width: 700,
+    marginTop: 400,
+    height: 51,
+    marginLeft: -9,
+    backgroundColor: "white",
+  },
+  iconbutton: {
+    marginLeft: 170,
+    marginTop: -10,
+    position: "absolute",
   },
 });

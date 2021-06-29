@@ -1,8 +1,15 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, Switch, StyleSheet } from "react-native";
-import { List } from "react-native-paper";
+import { List, IconButton } from "react-native-paper";
 import CustomMultiPicker from "react-native-multiple-select-list";
 import { ScrollView } from "react-native-gesture-handler";
+
+import Icon from "@mdi/react";
+import { mdiAccount } from "@mdi/js";
+
+
+
+
 
 const terceirosetor = {
   1: "associação",
@@ -79,9 +86,8 @@ export default function setor_publico() {
         />
         </View>
       </View>
-      </ScrollView>
-      
-<ScrollView>
+    
+
   <List.AccordionGroup s>
         <Text style={styles.esq}>
           <List.Accordion title="setor de atividade" id="1" >
@@ -101,7 +107,7 @@ export default function setor_publico() {
           selectedIconName={"ios-checkmark-circle-outline"}
           unselectedIconName={"ios-radio-button-off-outline"}
           selected={"none"} // list of options which are selected by default
-          scrollViewHeight={500}
+          scrollViewHeight={1000}
           checkmar={"yellow"}
         />
           </List.Accordion>
@@ -124,14 +130,23 @@ export default function setor_publico() {
           iconSize={30}
           selectedIconName={"ios-checkmark-circle-outline"}
           unselectedIconName={"ios-radio-button-off-outline"}
-          selected={"none"} // list of options which are selected by default
+          selected={"none"} // list of options which are selected by 
+          scrollViewHeight={990}
           checkmar={"yellow"}
         />
           </List.Accordion>
         </Text>
       </List.AccordionGroup>
 </ScrollView>
-      
+<View style={styles.headerFooterStyle}>
+          <IconButton
+            style={styles.iconbutton}
+            icon="check-circle"
+            color={"gray"}
+            size={45}
+            onPress={() => console.log("Pressed")}
+          />
+        </View>
     </View>
   );
 }
@@ -202,5 +217,16 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     flexDirection: "row",
   },
-  
+  headerFooterStyle: {
+    width: 700,
+    marginTop: 400,
+    height: 51,
+    marginLeft: -9,
+    backgroundColor: "white",
+  },
+  iconbutton: {
+    marginLeft: 170,
+    marginTop: -10,
+    position: "relative",
+  },
 });

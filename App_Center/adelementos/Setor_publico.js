@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, Switch, StyleSheet, Button } from "react-native";
-import { List } from "react-native-paper";
+import { List, IconButton } from "react-native-paper";
 import CustomMultiPicker from "react-native-multiple-select-list";
-import Icon from 'react-native-vector-icons/FontAwesome';
+//import Icon from 'react-native-vector-icons/FontAwesome';
 import { ScrollView } from "react-native";
+import Icon from '@mdi/react';
+import { mdiAccount } from '@mdi/js';
 
 const entidadespublicas = {
   1: "município",
@@ -134,20 +136,19 @@ export default function setor_publico() {
           </List.Accordion>
         </Text>
       </List.AccordionGroup> 
-      <View style={styles.headerFooterStyle}>
-    <Button style={styles.buttonfooter}
-  icon={
-    <Icon
-      name="arrow-right"
-      size={15}
-      color="white"
-    />
-  }
-  title=""
-/>
-      </View>
-      </ScrollView>
      
+      </ScrollView>
+      <View style={styles.headerFooterStyle}>
+      
+      <IconButton
+            style={styles.iconbutton}
+            icon="check-circle"
+            color={"gray"}
+            size={45}
+            onPress={() => console.log("Pressed")}
+          />
+       
+      </View>
      
     </View>
   );
@@ -176,18 +177,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     borderRadius: 20,
   },
-  button: {
-    marginTop: 50,
-    paddingVertical: 20,
-    paddingHorizontal: 40,
-    paddingRight: 60,
-    borderRadius: 15,
-  },
-  buttonText: {
-    color: "#fff",
-    textAlign: "center",
-    fontSize: 24,
-  },
+
   textitlefirst: {
     textAlign: "center",
     fontSize: 25,
@@ -220,13 +210,19 @@ const styles = StyleSheet.create({
     marginBottom: 10,
     flexDirection: "row",
   },
-  headerFooterStyle: {
-    width: '100%',
-    marginTop:315,
-    height: 45,
-    backgroundColor:"white",
-  },
   listtext:{
 color:"yellow",
+  },
+  headerFooterStyle: {
+    width:700,
+    marginTop:400,
+    height: 51,
+    marginRight:15,
+    backgroundColor: "white",
+    
+  },
+  iconbutton: {
+    marginLeft:150,
+    marginTop:-10,
   },
 });

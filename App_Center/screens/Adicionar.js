@@ -34,9 +34,11 @@ export default AdicionarLista = ({ navigation }) => {
       {list.map((item, i) => (
         <ListItem 
         containerStyle={{backgroundColor:"#EEF5FF"}}
+
           key={i}
           bottomDivider
           style={{backgroundColor:'undefined'}}
+          style={{ marginBottom: 15, paddingBottom:-5}}
           button
           onPress={() =>
             navigation.navigate(item.component)

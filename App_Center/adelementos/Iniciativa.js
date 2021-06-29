@@ -84,7 +84,7 @@ export default function adicionar_Iniciativas() {
           </List.Accordion>
         </Text>
         <View>
-    <Text></Text>
+   
     <Divider />
     <Divider />
   </View>
@@ -102,7 +102,7 @@ export default function adicionar_Iniciativas() {
         </Text>
       </List.AccordionGroup>
       <View>
-    <Text></Text>
+    
     <Divider />
     <Divider />
   </View>

@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from "react";
 import { Text, View, Switch, StyleSheet } from "react-native";
-import { List } from "react-native-paper";
+import { List, IconButton } from "react-native-paper";
 import CustomMultiPicker from "react-native-multiple-select-list";
 import { ScrollView } from "react-native-gesture-handler";
+import Icon from '@mdi/react';
+import { mdiAccount } from '@mdi/js';
+
+
+
 
 const entidadesprivadas = {
   1: "empresa",
@@ -124,7 +129,19 @@ export default function setor_privado() {
             </List.Accordion>
           </Text>
         </List.AccordionGroup>
+        
       </ScrollView>
+      <View style={styles.headerFooterStyle}>
+      
+      <IconButton
+            style={styles.iconbutton}
+            icon="check-circle"
+            color={"gray"}
+            size={45}
+            onPress={() => console.log("Pressed")}
+          />
+    
+   </View>
     </View>
   );
 }
@@ -151,18 +168,7 @@ const styles = StyleSheet.create({
     marginLeft: 15,
     borderRadius: 20,
   },
-  button: {
-    marginTop: 50,
-    paddingVertical: 20,
-    paddingHorizontal: 40,
-    paddingRight: 60,
-    borderRadius: 15,
-  },
-  buttonText: {
-    color: "#fff",
-    textAlign: "center",
-    fontSize: 24,
-  },
+  
   textitlefirst: {
     textAlign: "center",
     fontSize: 25,
@@ -194,5 +200,17 @@ const styles = StyleSheet.create({
     padding: 10,
     marginBottom: 10,
     flexDirection: "row",
+  },
+  headerFooterStyle: {
+    width:700,
+    marginTop:400,
+    height: 51,
+    marginRight:15,
+    backgroundColor: "white",
+    
+  },
+  iconbutton: {
+    marginLeft:150,
+    marginTop:-10,
   },
 });

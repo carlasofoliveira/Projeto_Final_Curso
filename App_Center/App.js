@@ -31,6 +31,10 @@ import
  MaterialCommunityIcons
 from 'react-native-vector-icons/MaterialCommunityIcons';
 import { Button } from "react-native-elements/dist/buttons/Button";
+import Login from "./adelementos/Login";
+
+
+
 
 
 
@@ -129,13 +133,12 @@ function AdicionarTabNavigator({ navigation, route }) {
             />
           ),
         }}/>
-      <Tab.Screen name="checkmark_perfil" component={checkmark_entidade} />
       <Tab.Screen name="entrar criar" component={entrar_criar} />
     </Tab.Navigator>
   );
 }
 
-const App = () => {
+const App = ({navigation}) => {
   
 
   return (
@@ -145,12 +148,11 @@ const App = () => {
         name="Home"
         component={AdicionarTabNavigator}
         options={{
-          headerTitleStyle: {
-            color: "white",
-          },
           headerStyle: {
-            backgroundColor: "#4F81C7",
-          },
+            backgroundColor: "#4F81C7"},
+            headerTitleStyle: {
+              color: "white",
+            },
         }}
         
       />
@@ -170,12 +172,12 @@ const App = () => {
           name="Adicionar"
           component={AdicionarLista}
           options={{
-            headerTitleStyle: {
-              color: "white",
-            },
             headerStyle: {
-              backgroundColor: "#4F81C7",
-            },
+              backgroundColor: "#4F81C7"},
+              headerTitleStyle: {
+                color: "white",
+              },
+             
           }}
         />
         <Stack.Screen
@@ -297,6 +299,9 @@ const App = () => {
             headerStyle: {
               backgroundColor: "#4F81C7",
             },
+            headerLeft: () => (
+              <Button onPress={() => navigation.goBack()} title="Back" />
+            ),
           }}
         />
         <Stack.Screen
@@ -333,6 +338,7 @@ const App = () => {
             headerStyle: {
               backgroundColor: "#4F81C7",
             },
+            
           }}
         />
         <Stack.Screen
@@ -348,7 +354,18 @@ const App = () => {
           }}
         />
       </Stack.Navigator>
-      
+      <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{
+            headerTitleStyle: {
+              color: "white",
+            },
+            headerStyle: {
+              backgroundColor: "#4F81C7",
+            },
+          }}
+        />
     </NavigationContainer>
   );
 };

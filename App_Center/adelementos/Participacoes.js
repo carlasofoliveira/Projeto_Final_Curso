@@ -4,7 +4,7 @@ import { List, IconButton, Colors  } from "react-native-paper";
 import CustomMultiPicker from "react-native-multiple-select-list";
 import { ScrollView } from "react-native-gesture-handler";
 import Icon from '@mdi/react';
-import { mdiAccount } from '@mdi/js'
+import { mdiAccount } from '@mdi/js';
 //import Icon from "react-native-vector-icons/FontAwesome";
 
 
@@ -55,10 +55,8 @@ export default function Participacao_individual() {
   };
 
   return (
-    <ScrollView>
-       <View style={styles.container}>
+    <ScrollView style={styles.container}>
       <ScrollView>
-        <View>
           <View>
             <View>
               <CustomMultiPicker
@@ -117,7 +115,7 @@ export default function Participacao_individual() {
                   selectedIconName={"ios-checkmark-circle-outline"}
                   unselectedIconName={"ios-radio-button-off-outline"}
                   selected={"none"} // list of options which are selected by default
-                  scrollViewHeight={500}
+                  scrollViewHeight={1000}
                   checkmar={"yellow"}
                 />
               </List.Accordion>
@@ -134,19 +132,20 @@ export default function Participacao_individual() {
                     console.log(res);
                   }} // callback, array of selected items
                   rowBackgroundColor={"#97C2FF"}
-                  rowHeight={36}
+                  rowHeight={30}
                   rowRadius={11.55}
                   iconColor={"blue"}
                   iconSize={30}
                   selectedIconName={"ios-checkmark-circle-outline"}
                   unselectedIconName={"ios-radio-button-off-outline"}
-                  selected={"none"} // list of options which are selected by default
+                  selected={"none"} // list of options which are selected by 
+                  scrollViewHeight={1000}
                   checkmar={"yellow"}
                 />
               </List.Accordion>
             </Text>
           </List.AccordionGroup>
-        </View>
+     
       </ScrollView>
 
       <View style={styles.headerFooterStyle}>
@@ -154,12 +153,13 @@ export default function Participacao_individual() {
        <IconButton style={styles.iconbutton}
        icon="check-circle"
        color={"gray"}
-       size={50}
-       onPress={() => console.log('Pressed')}
-     />
+       size={45}
       
+       onPress={() => console.log('Pressed')}
+     
+     />
+ 
       </View>
-    </View>
     </ScrollView>
    
   );
@@ -173,6 +173,7 @@ const styles = StyleSheet.create({
   },
   esq: {
     textAlign: "left",
+    paddingRight:150,
   },
   scroll: {
     backgroundColor: "#EEF5FF",
@@ -244,5 +245,6 @@ const styles = StyleSheet.create({
   iconbutton: {
     marginLeft:150,
     marginTop:-15,
+    position: 'absolute',
   },
 });
