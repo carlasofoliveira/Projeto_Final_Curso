@@ -1,7 +1,7 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { List,} from "react-native-paper";
-import { StyleSheet, Text, View, Button, Image } from "react-native";
+import { StyleSheet, Text, View, Button, Image,ScrollView } from "react-native";
 import Carousel from "simple-carousel-react-native";
 
 
@@ -9,8 +9,10 @@ export default function Home({ navigation }) {
   
 
   return (
-    
+
     <View style={styles.container}>
+      <ScrollView style={styles.ScrollView}>
+
       
       <Text> Destaques</Text>
       <Button
@@ -334,6 +336,7 @@ export default function Home({ navigation }) {
           </List.Accordion>
         </Text>
       </List.AccordionGroup>
+      </ScrollView>
     </View>
   );
 }

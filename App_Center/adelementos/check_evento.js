@@ -17,7 +17,7 @@ export default function check_evento() {
   return (
     <View style={styles.container}>
 <Image   style={styles.img} source={require('../assets/icon-ok.png')} />
-<Text style={styles.message}> Entidade guardada com sucesso!</Text>
+<Text style={styles.message}> Atividade guardada com sucesso!</Text>
     </View>
   );
 

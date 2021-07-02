@@ -1,7 +1,7 @@
 import "react-native-gesture-handler";
 import React from "react";
 import { getFocusedRouteNameFromRoute } from "@react-navigation/native";
-import { NavigationContainer } from "@react-navigation/native";
+
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./screens/Home";
 import Novo_Evento from "./adelementos/Novo_Evento";
@@ -28,11 +28,13 @@ import Pos_registo from "./adelementos/Registo_feito";
 import detalhes_entidade from "./adelementos/detalhes_entidade";
 import entrar_criar from "./adelementos/entrar_criar";
 import Login from "./adelementos/Login";
+import definicoes from "./adelementos/definicoes";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
-import { Button, TouchableOpacity, Image, StyleSheet } from "react-native";
-
+import { TouchableOpacity, Image, StyleSheet } from "react-native";
+import { NavigationContainer } from "@react-navigation/native";
 //import SimpleImagePicker from "./adelementos/SimpleImagePicker";
 //import imagepickerground from "./adelementos/SimpleImagePicker";
+import { IconButton, Colors } from "react-native-paper";
 
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
@@ -41,11 +43,11 @@ function getHeaderTitle(route) {
   // If the focused route is not found, we need to assume it's the initial screen
   // This can happen during if there hasn't been any navigation inside the screen
   // In our case, it's "Feed" as that's the first screen inside the navigator
-  const routeName = getFocusedRouteNameFromRoute(route) ?? "Feed";
+  const routeName = getFocusedRouteNameFromRoute(route) ?? "Home";
 
   switch (routeName) {
     case "Inicio":
-      return "Inicio";
+      return "";
     case "Ideia":
       return "Ideia";
     case "Adicionar":
@@ -54,8 +56,10 @@ function getHeaderTitle(route) {
       return "Guardados";
     case "Notificacoes":
       return "Notificações";
+    case "Home":
+      return "";
     default:
-      return "Nome Indeterminado";
+      return "Não definido";
   }
 }
 
@@ -106,11 +110,7 @@ function AdicionarTabNavigator({ navigation, route }) {
         options={{
           tabBarLabel: "Guardados",
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons
-              name="bookmark"
-              color={color}
-              size={size}
-            />
+            <MaterialCommunityIcons name="bookmark" color={color} size={size} />
           ),
         }}
       />
@@ -130,26 +130,40 @@ function AdicionarTabNavigator({ navigation, route }) {
 }
 
 const App = () => {
+  const navigationRef = React.useRef(null);
+
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Stack.Navigator>
         <Stack.Screen
           name="Home"
           component={AdicionarTabNavigator}
           options={{
-            title: "Home",
             headerTitleStyle: {
               color: "#fff",
+              position: "absolute",
+              alignSelf: "center",
             },
             headerStyle: {
               backgroundColor: "#4F81C7",
             },
-            headerRight: () =>
-            <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
-              <Image source={require('./assets/cog-outline.png')}
-                     style={styles.settingsIcon} />
-            </TouchableOpacity>,
-            
+            headerRight: () => (
+              <IconButton
+                style={styles.definicoes}
+                icon="cog-outline"
+                color={Colors.white}
+                size={20}
+                onPress={() => navigationRef.current?.navigate("definicoes")}
+              />
+            ),
+            headerLeft: () => (
+              <TouchableOpacity>
+                <Image
+                  source={require("./assets/logotipo_appcenter.png")}
+                  style={styles.logoappcenter}
+                />
+              </TouchableOpacity>
+            ),
           }}
         />
         <Stack.Screen
@@ -166,7 +180,6 @@ const App = () => {
               <Button
               title = "Test"
               onPress = {() => this.params.handleSave() } />*/
-            
           }}
         />
         <Stack.Screen
@@ -175,6 +188,7 @@ const App = () => {
           options={{
             headerTitleStyle: {
               color: "white",
+              position: "center",
             },
             headerStyle: {
               backgroundColor: "#4F81C7",
@@ -296,6 +310,7 @@ const App = () => {
           options={{
             headerTitleStyle: {
               color: "white",
+              position: "absolute",
             },
             headerStyle: {
               backgroundColor: "#4F81C7",
@@ -374,17 +389,34 @@ const App = () => {
             },
           }}
         />
+        <Stack.Screen
+          name="definicoes"
+          component={definicoes}
+          options={{
+            headerTitleStyle: {
+              color: "white",
+            },
+            headerStyle: {
+              backgroundColor: "#4F81C7",
+            },
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 const styles = StyleSheet.create({
-  settingsIcon: {
+  definicoes: {
     height: 20,
-    width: 20,
+    width: 22,
+    marginRight: 7,
+    marginTop: 25,
   },
-  
-  
+  logoappcenter: {
+    width: 109,
+    height: 45,
+    marginTop: 25,
+  },
 });
 
 export default App;

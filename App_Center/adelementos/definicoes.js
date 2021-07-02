@@ -13,8 +13,7 @@ import { mdiAccount } from "@mdi/js";
 //import { Switch } from 'react-native-paper';
 import DatePicker from "react-native-modern-datepicker";
 
-
-export default function Novo_Evento() {
+export default function definicoes() {
   const [input, setInput] = React.useState("");
   const [shouldShow1, setShouldShow1] = useState(false);
   const [shouldShow2, setShouldShow2] = useState(false);
@@ -41,15 +40,10 @@ export default function Novo_Evento() {
     setIsEnabled4((previousState) => !previousState);
   };
 
-  
-
-
-
   return (
     
       
         <ScrollView style={styles.ScrollView}>
-          
         <View style={styles.Imageinsert}>
           <LinearGradient
             colors={["#E3CEF6", "#CEF6EC"]}
