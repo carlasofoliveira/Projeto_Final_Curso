@@ -15,6 +15,11 @@ export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.ScrollView}>
+      <Button
+          style={styles.buttonmap}
+          title="ver Mapa"
+          onPress={() => navigation.navigate("Mapa")}
+        />
         <View>
           <Carousel showBubbles={false} style={styles.tamcarrossel}>
             <View style={styles.fundcarrosel}>
@@ -56,13 +61,7 @@ export default function Home({ navigation }) {
             </View>
           </Carousel>
         </View>
-
-        <Text> Destaques</Text>
-        <Button
-          style={styles.button}
-          title="ver Mapa"
-          onPress={() => navigation.navigate("Mapa")}
-        />
+        
 
         <List.AccordionGroup style={styles.Accordion}>
           <Text style={styles.content}>
@@ -465,10 +464,11 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   tam: {
-    marginTop: 0,
+    marginTop: 5,
     width: 350,
     height: 200,
     borderRadius: 10,
+   
   },
   esp: {
     marginTop: 15,
@@ -487,9 +487,10 @@ const styles = StyleSheet.create({
     marginLeft: 20,
     color: "black",
   },
-  tamcarrossel: {
-    height: 200,
-    marginBottom: -1,
-    paddingBottom: 0,
+  
+  buttonmap: {
+    paddingRight:55,
+    marginTop:5,
+    height:5,
   },
 });

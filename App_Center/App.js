@@ -140,8 +140,10 @@ const App = () => {
           component={AdicionarTabNavigator}
           options={{
             title: "Home",
+            headerTitleAlign: 'center',
             headerTitleStyle: {
               color: "#fff",
+            
             },
             headerStyle: {
               backgroundColor: "#4F81C7",
@@ -309,6 +311,7 @@ const App = () => {
           options={{
             headerTitleStyle: {
               color: "white",
+ 
             },
             headerStyle: {
               backgroundColor: "#4F81C7",
@@ -321,6 +324,7 @@ const App = () => {
           options={{
             headerTitleStyle: {
               color: "white",
+              alignSelf: 'center' 
             },
             headerStyle: {
               backgroundColor: "#4F81C7",
