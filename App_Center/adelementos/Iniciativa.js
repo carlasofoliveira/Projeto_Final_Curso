@@ -1,5 +1,6 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { isLoggedIn } from "../adelementos/API_Calls";
 import {
   StyleSheet,
   Text,
@@ -8,11 +9,11 @@ import {
   Switch,
   Button,
   ScrollView,
+  ActivityIndicator,
 } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
-import { List, Divider,IconButton } from "react-native-paper";
-
-
+import { List, Divider, IconButton } from "react-native-paper";
+import Entrar_criar from "../adelementos/Entrar_criar";
 
 import Icon from "@mdi/react";
 import { mdiAccount } from "@mdi/js";
@@ -21,7 +22,7 @@ import { mdiAccount } from "@mdi/js";
 
 //import { Switch } from 'react-native-paper';
 
-export default function adicionar_Iniciativas() {
+export default function adicionar_Iniciativas( {navigation} ) {
   const [input, setInput] = React.useState("");
   const [shouldShow, setShouldShow] = useState(false);
 
@@ -41,141 +42,155 @@ export default function adicionar_Iniciativas() {
     setIsEnabled3((previousState) => !previousState);
   };
 
+  const [isLoading, setLoading] = useState(true);
+  const [isUserLogged, setLoginData] = useState(true);
+
+  useEffect(() => {
+    setLoading(false);
+    isLoggedIn("test1", "xpto").then((isLogged) => {
+      console.log("isLogged", isLogged.logado);
+      setLoginData(isLogged.logado);
+    });
+  }, []);
 
   return (
-    <ScrollView style={styles.scroll}>
-        <View style={styles.container}>
-      <View style={styles.Imageinsert}>
-        <LinearGradient
-          colors={["#E3CEF6", "#CEF6EC"]}
-          start={{
-            x: 0,
-            y: 0,
-          }}
-          end={{
-            x: 1,
-            y: 1,
-          }}
-          style={styles.box}
-        />
-      </View>
-      <Text style={styles.textitlefirst}> Designação </Text>
-      <StatusBar style="auto" />
-      <TextInput
-        style={styles.input}
-        onChangeText={(text) => setInput(text)}
-        onSubmitEditing={() => {
-          setInput("");
-        }}
-        placeholder="inserir designação..."
-      />
-<View>
-    <Text></Text>
-    <Divider />
-    <Divider />
-  </View>
-      <List.AccordionGroup style={styles.Accordion}>
-        <Text style={styles.esq}>
-          <List.Accordion title="Descrição" id="1">
-            <TextInput
-              style={styles.input}
-              onChangeText={(text) => setInput(text)}
-              onSubmitEditing={() => {
-                setInput("");
-              }}
-              placeholder="inserir descrição..."
-            />
-          </List.Accordion>
-        </Text>
-        <View>
-   
-    <Divider />
-    <Divider />
-  </View>
-        <Text style={styles.esq}>
-          <List.Accordion title="Local" id="2">
-            <TextInput
-              style={styles.input}
-              onChangeText={(text) => setInput(text)}
-              onSubmitEditing={() => {
-                setInput("");
-              }}
-              placeholder="inserir local..."
-            />
-          </List.Accordion>
-        </Text>
-      </List.AccordionGroup>
-      <View>
-    
-    <Divider />
-    <Divider />
-  </View>
-      <View>
-        <View style={({ marginBottom: 28 }, { marginRight: 30 })}>
-          <View style={{ width: 270 }}>
-            <Text style={{ fontSize: 15, marginTop: 25, left: 18 }}>
-              {"convidar parceiros"}
-            </Text>
-          </View>
-          <Switch
-            style={{ marginTop: -25, paddingBottom: -3 }}
-            trackColor={{ false: "#808080", true: "#4F81C7" }}
-            thumbColor={!isEnabled1 ? "#ffffff" : "#E5E5EA"}
-            onValueChange={alternarSwitch1}
-            value={isEnabled1}
-          />
-        </View>
+    <View style={{ flex: 1 }}>
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        [
+          isUserLogged ? (
+            <ScrollView style={styles.scroll}>
+              <View style={styles.container}>
+                <View style={styles.Imageinsert}>
+                  <LinearGradient
+                    colors={["#E3CEF6", "#CEF6EC"]}
+                    start={{
+                      x: 0,
+                      y: 0,
+                    }}
+                    end={{
+                      x: 1,
+                      y: 1,
+                    }}
+                    style={styles.box}
+                  />
+                </View>
+                <Text style={styles.textitlefirst}> Designação </Text>
+                <StatusBar style="auto" />
+                <TextInput
+                  style={styles.input}
+                  onChangeText={(text) => setInput(text)}
+                  onSubmitEditing={() => {
+                    setInput("");
+                  }}
+                  placeholder="inserir designação..."
+                />
+                <View>
+                  <Text></Text>
+                  <Divider />
+                  <Divider />
+                </View>
+                <List.AccordionGroup style={styles.Accordion}>
+                  <Text style={styles.esq}>
+                    <List.Accordion title="Descrição" id="1" key="1">
+                      <TextInput
+                        style={styles.input}
+                        onChangeText={(text) => setInput(text)}
+                        onSubmitEditing={() => {
+                          setInput("");
+                        }}
+                        placeholder="inserir descrição..."
+                        key="11"
+                      />
+                    </List.Accordion>
+                  </Text>
+                  <View>
+                    <Divider />
+                    <Divider />
+                  </View>
+                  <Text style={styles.esq}>
+                    <List.Accordion title="Local" id="2" key="2">
+                      <TextInput
+                        style={styles.input}
+                        onChangeText={(text) => setInput(text)}
+                        onSubmitEditing={() => {
+                          setInput("");
+                        }}
+                        placeholder="inserir local..."
+                        key="22"
+                      />
+                    </List.Accordion>
+                  </Text>
+                </List.AccordionGroup>
+                <View>
+                  <Divider />
+                  <Divider />
+                </View>
+                <View>
+                  <View style={({ marginBottom: 28 }, { marginRight: 30 })}>
+                    <View style={{ width: 270 }}>
+                      <Text style={{ marginTop: 25, left: 18 }}>
+                        {"convidar parceiros"}
+                      </Text>
+                    </View>
+                    <Switch
+                      style={{ marginTop: -25, paddingBottom: -3 }}
+                      trackColor={{ false: "#808080", true: "#4F81C7" }}
+                      thumbColor={!isEnabled1 ? "#ffffff" : "#E5E5EA"}
+                      onValueChange={alternarSwitch1}
+                      value={isEnabled1}
+                    />
+                  </View>
 
-        <View style={({ marginBottom: 28 }, { marginRight: 30 })}>
-          <View style={{ width: 270 }}>
-            <Text style={{ fontSize: 15, marginTop: 25, left: 18 }}>
-              {"solicitar recursos"}
-            </Text>
-          </View>
-          <Switch
-            style={{ marginTop: -25 }}
-            trackColor={{ false: "#808080", true: "#4F81C7" }}
-            thumbColor={!isEnabled2 ? "#ffffff" : "#FFFFFF"}
-            onValueChange={alternarSwitch2}
-            value={isEnabled2}
-          />
-        </View>
+                  <View style={({ marginBottom: 28 }, { marginRight: 30 })}>
+                    <View style={{ width: 270 }}>
+                      <Text style={{  marginTop: 25, left: 18 }}>
+                        {"solicitar recursos"}
+                      </Text>
+                    </View>
+                    <Switch
+                      style={{ marginTop: -25 }}
+                      trackColor={{ false: "#808080", true: "#4F81C7" }}
+                      thumbColor={!isEnabled2 ? "#ffffff" : "#FFFFFF"}
+                      onValueChange={alternarSwitch2}
+                      value={isEnabled2}
+                    />
+                  </View>
 
-        {shouldShow ? (
-        <View>
-        
-      </View>
-         ) : (
-          true
-        )}
+                  {shouldShow ? <View></View> : true}
 
-        <View style={({ marginBottom: 28 }, { marginRight: 30 })}>
-          <View style={{ width: 270 }}>
-            <Text style={{ fontSize: 15, marginTop: 25, left: 18 }}>
-              {"solicitar voluntários"}
-            </Text>
-          </View>
-          <Switch
-            style={{ marginTop: -25 }}
-            trackColor={{ false: "#808080", true: "#4F81C7" }}
-            thumbColor={!isEnabled3 ? "#ffffff" : "#FFFFFF"}
-            onValueChange={alternarSwitch3}
-            value={isEnabled3}
-          />
-        </View>
-      </View>
-      <View style={styles.headerFooterStyle}>
-          <IconButton
-            style={styles.iconbutton}
-            icon="check-circle"
-            color={"gray"}
-            size={45}
-            onPress={() => console.log("Pressed")}
-          />
-        </View>
+                  <View style={({ marginBottom: 28 }, { marginRight: 30 })}>
+                    <View style={{ width: 270 }}>
+                      <Text style={{ marginTop: 25, left: 18 }}>
+                        {"solicitar voluntários"}
+                      </Text>
+                    </View>
+                    <Switch
+                      style={{ marginTop: -25 }}
+                      trackColor={{ false: "#808080", true: "#4F81C7" }}
+                      thumbColor={!isEnabled3 ? "#ffffff" : "#FFFFFF"}
+                      onValueChange={alternarSwitch3}
+                      value={isEnabled3}
+                    />
+                  </View>
+                </View>
+                <View style={styles.headerFooterStyle}>
+                  <IconButton
+                    style={styles.iconbutton}
+                    icon="check-circle"
+                    color={"gray"}
+                    onPress={() => console.log("Pressed")}
+                  />
+                </View>
+              </View>
+           </ScrollView>
+          ) : (
+            <Entrar_criar/>
+          ),
+        ]
+      )} 
     </View>
-    </ScrollView>
-  
   );
 }
 
@@ -185,11 +200,11 @@ const styles = StyleSheet.create({
     backgroundColor: "#EEF5FF",
     paddingLeft: 10,
   },
-  scroll:{
+  scroll: {
     backgroundColor: "#EEF5FF",
     flexGrow: 1,
-    height:'100%',
-  }, 
+    height: "100%",
+  },
   esq: {
     textAlign: "left",
   },
@@ -254,4 +269,5 @@ const styles = StyleSheet.create({
     marginTop: -10,
     position: "absolute",
   },
+ 
 });

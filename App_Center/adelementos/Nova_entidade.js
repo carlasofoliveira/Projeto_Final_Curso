@@ -1,9 +1,13 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { isLoggedIn } from "../adelementos/API_Calls";
 import { StyleSheet, Text, View, TextInput } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { ListItem } from "react-native-elements";
-import { ScrollView } from "react-native";
+import { ScrollView,  ActivityIndicator, } from "react-native";
+import Entrar_criar from "../adelementos/Entrar_criar";
+
+
 
 const list = [
   {
@@ -27,10 +31,29 @@ const list = [
     component: "rede de entidades",
   },
 ];
+
+
 export default function Nova_Entidade({ navigation }) {
   const [input, setInput] = React.useState("");
 
+  const [isLoading, setLoading] = useState(true);
+  const [isUserLogged, setLoginData] = useState(true);
+
+  useEffect(() => {
+    setLoading(false);
+    isLoggedIn("test1", "xpto").then((isLogged) => {
+      console.log("isLogged", isLogged.logado);
+      setLoginData(isLogged.logado);
+    });
+  }, []);
+
   return (
+    <View style={{ flex: 1 }}>
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        [
+          isUserLogged ? (
     <ScrollView style={styles.scroll}>
       <View style={styles.container}>
       <View style={styles.Imageinsert}>
@@ -65,9 +88,10 @@ export default function Nova_Entidade({ navigation }) {
             key={i}
             bottomDivider
             button
+            chevron={{color:'red'}}
             onPress={() => navigation.navigate(item.component)}
           >
-            <ListItem.Title >
+            <ListItem.Title style={{color:"#345481"}}>
               {item.title}
             </ListItem.Title>
             <ListItem.Chevron />
@@ -76,7 +100,12 @@ export default function Nova_Entidade({ navigation }) {
       </View>
     </View>
     </ScrollView>
-    
+     ) : (
+      <Entrar_criar/>
+    ),
+  ]
+)} 
+</View>
   );
 }
 

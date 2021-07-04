@@ -1,11 +1,12 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
-import { StyleSheet, Text, View, TextInput, Switch } from "react-native";
+import React, { useState, useEffect } from "react";
+import { isLoggedIn } from "../adelementos/API_Calls";
+import { StyleSheet, Text, View, TextInput, Switch, ActivityIndicator, } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { List, Divider, IconButton } from "react-native-paper";
 import CustomMultiPicker from "react-native-multiple-select-list";
-import { ScrollView } from "react-native-gesture-handler";
-
+import { ScrollView,  } from "react-native-gesture-handler";
+import Entrar_criar from "../adelementos/Entrar_criar";
 import Icon from "@mdi/react";
 import { mdiAccount } from "@mdi/js";
 
@@ -49,8 +50,26 @@ export default function Novo_Evento() {
     setIsEnabled2((previousState) => !previousState);
     setShouldShow(!shouldShow);
   };
+  const [isLoading, setLoading] = useState(true);
+  const [isUserLogged, setLoginData] = useState(true);
+
+  useEffect(() => {
+    setLoading(false);
+    isLoggedIn("test1", "xpto").then((isLogged) => {
+      console.log("isLogged", isLogged.logado);
+      setLoginData(isLogged.logado);
+    });
+  }, []);
+
+
 
   return (
+    <View style={{ flex: 1 }}>
+      {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        [
+          isUserLogged ? (
   <ScrollView>
     <View style={styles.container}>
       <View style={styles.Imageinsert}>
@@ -175,13 +194,19 @@ export default function Novo_Evento() {
             style={styles.iconbutton}
             icon="check-circle"
             color={"gray"}
-            size={45}
+           
             onPress={() => console.log("Pressed")}
           />
         </View>
       </View>
     </View> 
      </ScrollView>
+     ) : (
+      <Entrar_criar/>
+    ),
+  ]
+)} 
+</View>
   );
 }
 

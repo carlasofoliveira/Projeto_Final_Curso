@@ -56,9 +56,9 @@ export default function setor_privado() {
     setIsEnabled1((previousState) => !previousState);
   };
 
-  return (
+  return ( <ScrollView>
     <View style={styles.container}>
-      <ScrollView>
+     
         <View>
           <View>
             <CustomMultiPicker
@@ -130,7 +130,7 @@ export default function setor_privado() {
           </Text>
         </List.AccordionGroup>
         
-      </ScrollView>
+     
       <View style={styles.headerFooterStyle}>
       
       <IconButton
@@ -142,7 +142,8 @@ export default function setor_privado() {
           />
     
    </View>
-    </View>
+    </View> 
+    </ScrollView>
   );
 }
 

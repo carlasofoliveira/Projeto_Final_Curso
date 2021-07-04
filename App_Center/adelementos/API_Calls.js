@@ -1,5 +1,5 @@
 
-/*export function isLoggedIn() {
+export function isLoggedIn(userName, passWord) {
     return fetch("http://deca-centerweb.ua.pt/login/", {
         method: "POST",
         headers: {
@@ -7,9 +7,9 @@
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: "myname",
-          password: "mypassword",
+          username: userName,
+          password: passWord,
         }),
       })
       .then(data => data.json())
-   }*/
+   }

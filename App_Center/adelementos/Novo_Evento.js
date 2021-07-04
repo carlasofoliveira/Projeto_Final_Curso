@@ -1,11 +1,12 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
+import React, { useState, useEffect, } from "react";
+import { isLoggedIn } from "../adelementos/API_Calls";
 import { StyleSheet, Text, View, TextInput, Switch, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { List, Divider, IconButton } from "react-native-paper";
 import Carousel from "simple-carousel-react-native";
-import { ScrollView } from "react-native";
-
+import { ScrollView, ActivityIndicator, } from "react-native";
+import Entrar_criar from "../adelementos/Entrar_criar";
 import Icon from "@mdi/react";
 import { mdiAccount } from "@mdi/js";
 //  import { Card, CardTitle, CardContent, CardAction, CardButton, CardImage } from 'react-native-material-cards'
@@ -41,15 +42,29 @@ export default function Novo_Evento() {
     setIsEnabled4((previousState) => !previousState);
   };
 
-  
+  const [isLoading, setLoading] = useState(true);
+  const [isUserLogged, setLoginData] = useState(true);
+
+  useEffect(() => {
+    setLoading(false);
+    isLoggedIn("test1", "xpto").then((isLogged) => {
+      console.log("isLogged", isLogged.logado);
+      setLoginData(isLogged.logado);
+    });
+  }, []);
+
 
 
 
   return (
-    
-      
+    <View style={{ flex: 1 }}>
+       {isLoading ? (
+        <ActivityIndicator />
+      ) : (
+        [
+          isUserLogged ? (
         <ScrollView style={styles.ScrollView}>
-          
+         
         <View style={styles.Imageinsert}>
           <LinearGradient
             colors={["#E3CEF6", "#CEF6EC"]}
@@ -78,7 +93,7 @@ export default function Novo_Evento() {
         <Divider />
         <List.AccordionGroup style={styles.Accordion}>
           <Text style={styles.esq}>
-            <List.Accordion title="Descrição" id="1">
+            <List.Accordion title="Descrição" id="1"style={{color:"#345481"}}>
               <TextInput
                 style={styles.input}
                 onChangeText={(text) => setInput(text)}
@@ -110,7 +125,7 @@ export default function Novo_Evento() {
 
         <View style={({ marginBottom: 28 }, { marginRight: 30 })}>
           <View style={{ width: 270 }}>
-            <Text style={{ fontSize: 15, marginTop: 25, left: 18 }}>
+            <Text style={{  marginTop: 25, left: 18 }}>
               {"apresentar data/período"}
             </Text>
           </View>
@@ -248,8 +263,14 @@ export default function Novo_Evento() {
             onPress={() => console.log("Pressed")}
           />
         </View>
-        </ScrollView>
-    
+       
+        </ScrollView> 
+        ) : (
+          <Entrar_criar/>
+        ),
+      ]
+    )} 
+    </ View>
   );
 }
 
@@ -370,5 +391,8 @@ const styles = StyleSheet.create({
     marginLeft: 170,
     marginTop: -10,
     position: "relative",
+  },
+  listaccordion:{
+color:"#345481",
   },
 });

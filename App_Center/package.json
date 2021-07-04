@@ -20,6 +20,7 @@
     "expo": "^41.0.1",
     "expo-constants": "~10.1.3",
     "expo-linear-gradient": "^9.1.0",
+    "expo-secure-store": "~10.1.0",
     "expo-splash-screen": "~0.10.2",
     "expo-status-bar": "~1.0.4",
     "expo-updates": "~0.5.4",
@@ -74,8 +75,7 @@
     "rn-dividers": "^2.0.2",
     "simple-carousel-react-native": "^1.0.2",
     "toggle-switch-react-native": "^3.2.0",
-    "xmldom": "^0.6.0",
-    "expo-secure-store": "~10.1.0"
+    "xmldom": "^0.6.0"
   },
   "devDependencies": {
     "@babel/core": "^7.9.0"
