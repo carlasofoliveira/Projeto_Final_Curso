@@ -31,7 +31,7 @@ import Login from "./adelementos/Login";
 import definicoes from "./adelementos/definicoes";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Button, TouchableOpacity, Image, StyleSheet } from "react-native";
-
+import { IconButton, Colors } from "react-native-paper";
 //import SimpleImagePicker from "./adelementos/SimpleImagePicker";
 //import imagepickerground from "./adelementos/SimpleImagePicker";
 
@@ -46,7 +46,7 @@ function getHeaderTitle(route) {
 
   switch (routeName) {
     case "Inicio":
-      return "Inicio";
+      return "";
     case "Ideia":
       return "Ideia";
     case "Adicionar":
@@ -131,8 +131,9 @@ function AdicionarTabNavigator({ navigation, route }) {
 }
 
 const App = () => {
+  const navigationRef = React.useRef(null);
   return (
-    <NavigationContainer>
+    <NavigationContainer ref={navigationRef}>
       <Stack.Navigator>
         <Stack.Screen
           name="Home"
@@ -145,12 +146,23 @@ const App = () => {
             headerStyle: {
               backgroundColor: "#4F81C7",
             },
-            headerRight: () =>
-            <TouchableOpacity onPress={() => navigation.navigate('Settings')}>
-              <Image source={require('./assets/cog-outline.png')}
-                     style={styles.settingsIcon} />
-            </TouchableOpacity>,
-            
+            headerRight: () => (
+              <IconButton
+                style={styles.definicoes}
+                icon="cog-outline"
+                color={Colors.white}
+                size={20}
+                onPress={() => navigationRef.current?.navigate("definicoes")}
+              />
+            ),
+            headerLeft: () => (
+              <TouchableOpacity>
+                <Image
+                  source={require("./assets/logotipo_appcenter.png")}
+                  style={styles.logoappcenter}
+                />
+              </TouchableOpacity>
+            ),
           }}
         />
         <Stack.Screen
@@ -375,18 +387,37 @@ const App = () => {
             },
           }}
         />
+        <Stack.Screen
+          name="definicoes"
+          component={definicoes}
+          options={{
+            headerTitleStyle: {
+              color: "white",
+            },
+            headerStyle: {
+              backgroundColor: "#4F81C7",
+            },
+          }}
+        />
       </Stack.Navigator>
     </NavigationContainer>
   );
 };
 const styles = StyleSheet.create({
   settingsIcon: {
-    height: 20,
-    width: 20,
+    height: 25,
+    width: 22,
+    marginRight: 7,
+    marginTop: 25,
+  },
+  logoappcenter: {
+    width: 105,
+    height: 55,
+    marginTop: 25,
     paddingRight:5,
     marginRight:5,
+    marginLeft:-7,
   },
-
   
 });
 
