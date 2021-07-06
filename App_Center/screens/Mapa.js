@@ -28,8 +28,6 @@ const Mapa = () => {
       }
     })();
   });
-
-
   if (origin != null){
     return (
       <View style={styles.container}>
