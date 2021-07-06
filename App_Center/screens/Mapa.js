@@ -41,6 +41,7 @@ const Mapa = () => {
   const initialMapState = {
     markers,
     categories: [
+    
       {
         name: "Fastfood Center",
         icon: (
