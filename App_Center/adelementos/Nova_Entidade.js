@@ -3,10 +3,30 @@ import React from "react";
 import { StyleSheet, Text, View, TextInput } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { ListItem } from "react-native-elements";
-import DropDownItem from "react-native-drop-down-item";
 
-
-export default function Novo_Evento() {
+const list = [
+  {
+    title: "participação individual",
+    component: "Participacoes",
+  },
+  {
+    title: "setor público",
+    component: "Novo evento",
+  },
+  {
+    title: "setor privado",
+    component: "Nova entidade",
+  },
+  {
+    title: "terceiro setor",
+    component: "Voluntario",
+  },
+  {
+    title: "rede de entidades",
+    component: "Recurso",
+  },
+];
+export default function Nova_Entidade({ navigation }) {
   const [input, setInput] = React.useState("");
 
   return (
@@ -25,21 +45,34 @@ export default function Novo_Evento() {
           style={styles.box}
         />
       </View>
-      <View>
-         <Text style={styles.textitlefirst}> Designação ou Nome* </Text>
-       <StatusBar style="auto" />
+      <Text style={styles.textitlefirst}> Designação ou Nome* </Text>
+      <StatusBar style="auto" />
       <TextInput
         style={styles.input}
         onChangeText={(text) => setInput(text)}
         onSubmitEditing={() => {
           setInput("");
         }}
-        placeholder="inserir designação..." 
+        placeholder="inserir designação..."
       />
+      <View>
+        <Text style={styles.texttitlesecond}> Tipo de Edentidade* </Text>
+        {list.map((item, i) => (
+          <ListItem
+            key={i}
+            bottomDivider
+            style={styles.back}
+            button
+            onPress={() => navigation.navigate(item.component)}
+          >
+          
+              <ListItem.Title style={styles.ListItem}>
+                {item.title}
+              </ListItem.Title>
+            <ListItem.Chevron />
+          </ListItem>
+        ))}
       </View>
-    <DropDownItem>
-
-      </DropDownItem>
     </View>
   );
 }
@@ -51,6 +84,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
   },
+  content:{
+    textAlign: "center",
+  },
+  
   Imageinsert: {
     paddingTop: 100,
     paddingHorizontal: 30,
@@ -60,8 +97,7 @@ const styles = StyleSheet.create({
     height: 177,
     paddingTop: 1,
     marginTop: -70,
-  
-    borderRadius: 20,
+   borderRadius: 20,
   },
   button: {
     marginTop: 50,
@@ -78,17 +114,17 @@ const styles = StyleSheet.create({
   textitlefirst: {
     fontSize: 25,
     fontWeight: "bold",
-    color: "gray",
+    color: "black",
     paddingBottom: 10,
     marginTop: 25,
     marginLeft: 25,
   },
-  texsecondtitle: {
+  texttitlesecond: {
     fontSize: 25,
     fontWeight: "bold",
-    marginTop: 20,
-    marginLeft: 25,
-    color: "gray",
+    paddingBottom: 10,
+    marginTop: 25,
+    marginLeft: 6,
   },
   input: {
     backgroundColor:"white",
@@ -97,10 +133,10 @@ const styles = StyleSheet.create({
     width: 350,
     borderWidth: 1,
     borderRadius: 12,
-    padding: 5,
+    padding: 1,
     paddingLeft:25,
     marginTop: -5,
-    marginRight: 10,
+    marginRight: 16,
     marginBottom: 15,
     borderColor:"#FFFFFF",
   },
@@ -108,14 +144,9 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: "bold",
     color: "gray",
-    paddingBottom: 5,
+    paddingBottom: 7,
     marginTop: 5,
-    marginLeft: 25,
-  },
-  content:{
-    backgroundColor: "#EEF5FF",
-    paddingBottom: 5,
-    marginTop: 5,
-    marginLeft: 10,
+    marginLeft: 30,
+    paddingLeft: -5,
   },
 });

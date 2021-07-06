@@ -5,7 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 
 
-export default function adicionar_Ideias() {
+export default function Ideias() {
   const [input, setInput] =React.useState("") 
   
   return (
