@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from "react";
 import * as Location from "expo-location";
 import * as Permissions from "expo-permissions";
 import { View, Text, StyleSheet, Image } from "react-native";
-import MapView, { Marker } from "react-native-maps";
+import  MapView, { Marker } from "react-native-maps";
 import Carousel from "simple-carousel-react-native";
 import { GooglePlacesAutocomplete } from "react-native-google-places-autocomplete";
 
@@ -29,18 +29,32 @@ const Mapa = () => {
     })();
   });
 
-  return (
-    <View style={styles.container}>
-      <MapView
-        style={styles.map}
-        initialRegion={origin}
-        showsUserLocation={true}
-        loadingEnabled={true}
-      ></MapView>
-      
-    </View>
-  );
+
+  if (origin != null){
+    return (
+      <View style={styles.container}>
+        <MapView
+          style={styles.map}
+          initialRegion={origin}
+          showsUserLocation={true}
+          loadingEnabled={true}
+        >
+          <MapView.Marker
+            coordinate={{
+              latitude: origin.latitude,
+              longitude: origin.longitude,
+            }}
+            pinColor="blue"
+          ></MapView.Marker>
+        </MapView>
+      </View>
+    );
+  }
+  else{
+    return null;
+  }
 };
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
