@@ -1,61 +1,36 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useEffect, useState } from "react";
-import { isLoggedIn } from "../adelementos/API_Calls";
+import React from "react";
 import { StyleSheet, Text, View, TextInput } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { ListItem } from "react-native-elements";
-import { ScrollView,  ActivityIndicator, } from "react-native";
-import Entrar_criar from "../adelementos/Entrar_criar";
-
-
 
 const list = [
   {
     title: "participação individual",
-    component: "Participacao individual",
+    component: "Participacoes",
   },
   {
-    title: "Setor Público",
-    component: "setor publico",
+    title: "setor público",
+    component: "Novo evento",
   },
   {
-    title: "Setor Privado",
-    component: "setor privado",
+    title: "setor privado",
+    component: "Nova entidade",
   },
   {
     title: "terceiro setor",
-    component: "terceiro setor",
+    component: "Voluntario",
   },
   {
     title: "rede de entidades",
-    component: "rede de entidades",
+    component: "Recurso",
   },
 ];
-
-
 export default function Nova_Entidade({ navigation }) {
   const [input, setInput] = React.useState("");
 
-  const [isLoading, setLoading] = useState(true);
-  const [isUserLogged, setLoginData] = useState(true);
-
-  useEffect(() => {
-    setLoading(false);
-    isLoggedIn("test1", "xpto").then((isLogged) => {
-      console.log("isLogged", isLogged.logado);
-      setLoginData(isLogged.logado);
-    });
-  }, []);
-
   return (
-    <View style={{ flex: 1 }}>
-      {isLoading ? (
-        <ActivityIndicator />
-      ) : (
-        [
-          isUserLogged ? (
-    <ScrollView style={styles.scroll}>
-      <View style={styles.container}>
+    <View style={styles.container}>
       <View style={styles.Imageinsert}>
         <LinearGradient
           colors={["#E3CEF6", "#CEF6EC"]}
@@ -70,7 +45,7 @@ export default function Nova_Entidade({ navigation }) {
           style={styles.box}
         />
       </View>
-      <Text style={styles.textitlefirst}> Designação* </Text>
+      <Text style={styles.textitlefirst}> Designação ou Nome* </Text>
       <StatusBar style="auto" />
       <TextInput
         style={styles.input}
@@ -83,29 +58,22 @@ export default function Nova_Entidade({ navigation }) {
       <View>
         <Text style={styles.texttitlesecond}> Tipo de Edentidade* </Text>
         {list.map((item, i) => (
-          <ListItem 
-          containerStyle={{backgroundColor:"#EEF5FF"}}
+          <ListItem
             key={i}
             bottomDivider
+            style={styles.back}
             button
-            chevron={{color:'red'}}
             onPress={() => navigation.navigate(item.component)}
           >
-            <ListItem.Title style={{color:"#345481"}}>
-              {item.title}
-            </ListItem.Title>
+          
+              <ListItem.Title style={styles.ListItem}>
+                {item.title}
+              </ListItem.Title>
             <ListItem.Chevron />
           </ListItem>
         ))}
       </View>
     </View>
-    </ScrollView>
-     ) : (
-      <Entrar_criar/>
-    ),
-  ]
-)} 
-</View>
   );
 }
 
@@ -113,14 +81,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: "#EEF5FF",
+    alignItems: "center",
     justifyContent: "center",
-    paddingLeft: 10,
-    paddingRight: 6,
   },
-  content: {
+  content:{
     textAlign: "center",
   },
-
+  
   Imageinsert: {
     paddingTop: 100,
     paddingHorizontal: 30,
@@ -130,7 +97,7 @@ const styles = StyleSheet.create({
     height: 177,
     paddingTop: 1,
     marginTop: -70,
-    borderRadius: 20,
+   borderRadius: 20,
   },
   button: {
     marginTop: 50,
@@ -145,34 +112,33 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   textitlefirst: {
-    textAlign: "left",
-    fontSize: 16,
+    fontSize: 25,
     fontWeight: "bold",
     color: "black",
     paddingBottom: 10,
     marginTop: 25,
-    marginLeft: 0,
+    marginLeft: 25,
   },
   texttitlesecond: {
     fontSize: 25,
     fontWeight: "bold",
     paddingBottom: 10,
     marginTop: 25,
-    marginLeft: 9,
+    marginLeft: 6,
   },
   input: {
-    backgroundColor: "white",
-    fontSize: 16,
-    fontStyle: "normal",
+    backgroundColor:"white",
+    fontSize:16,
+    fontStyle:"normal",
     width: 350,
     borderWidth: 1,
     borderRadius: 12,
     padding: 1,
-    paddingLeft: 30,
+    paddingLeft:25,
     marginTop: -5,
-    marginRight: 30,
+    marginRight: 16,
     marginBottom: 15,
-    borderColor: "#FFFFFF",
+    borderColor:"#FFFFFF",
   },
   texttitlesecond: {
     fontSize: 25,
@@ -183,8 +149,4 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     paddingLeft: -5,
   },
-  scroll:{
-    backgroundColor: "#EEF5FF",
-  },
- 
 });
