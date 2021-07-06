@@ -73,7 +73,7 @@ function AdicionarTabNavigator({ navigation, route }) {
         options={{
           tabBarLabel: "Inicio",
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="home" color={color} size={size} />
+            <MaterialCommunityIcons name="home" color={color} size={size}  />
           ),
         }}
       />
@@ -161,6 +161,7 @@ const App = () => {
               <TouchableOpacity>
                 <Image
                   source={require("./assets/logotipo_appcenter.png")}
+                  
                   style={styles.logoappcenter}
                 />
               </TouchableOpacity>

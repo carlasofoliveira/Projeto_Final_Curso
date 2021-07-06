@@ -464,7 +464,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   tam: {
-    marginTop: 5,
+    marginTop: 9,
     width: 350,
     height: 200,
     borderRadius: 10,
@@ -479,7 +479,7 @@ const styles = StyleSheet.create({
 
   fundcarrosel: {
     backgroundColor: "white",
-    borderRadius: 5,
+    borderRadius: 10,
   },
   titulo: {
     fontSize: 20,
