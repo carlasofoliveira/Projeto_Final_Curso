@@ -5,7 +5,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 
 
 
-export default function adicionar_Voluntarios() {
+export default function Nova_Entidade() {
   const [input, setInput] =React.useState("") 
   
   return (
