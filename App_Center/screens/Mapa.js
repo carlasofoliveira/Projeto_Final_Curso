@@ -20,7 +20,7 @@ import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityI
 import Fontisto from "react-native-vector-icons/Fontisto";
 import Ionicons from "react-native-vector-icons/Ionicons";
 import { useTheme } from "@react-navigation/native";
-import StarRating from "../adelementos/StarRating";
+//import StarRating from "../adelementos/StarRating";
 
 import {
   markers,
@@ -44,39 +44,23 @@ const Mapa = () => {
     
       {
         name: "Fastfood Center",
-        icon: (
-          <MaterialCommunityIcons
-            style={styles.chipsIcon}
-            name="food-fork-drink"
-            size={18}
-          />
-        ),
+        
       },
       {
         name: "Restaurant",
-        icon: (
-          <Ionicons name="ios-restaurant" style={styles.chipsIcon} size={18} />
-        ),
+        
       },
       {
         name: "Dineouts",
-        icon: (
-          <Ionicons name="md-restaurant" style={styles.chipsIcon} size={18} />
-        ),
+       
       },
       {
         name: "Snacks Corner",
-        icon: (
-          <MaterialCommunityIcons
-            name="food"
-            style={styles.chipsIcon}
-            size={18}
-          />
-        ),
+        
       },
       {
         name: "Hotel",
-        icon: <Fontisto name="hotel" style={styles.chipsIcon} size={15} />,
+      
       },
     ],
     region: {
@@ -190,8 +174,6 @@ const Mapa = () => {
               ],
             };
             return (
-              
-                
                   <MapView.Marker
                     key={index}
                     coordinate={marker.coordinate}
@@ -214,15 +196,6 @@ const Mapa = () => {
                 );
           })}
         </MapView>
-        <View style={styles.searchBox}>
-          <TextInput
-            placeholder="Search here"
-            placeholderTextColor="#000"
-            autoCapitalize="none"
-            style={{ flex: 1, padding: 0 }}
-          />
-          <Ionicons name="ios-search" size={20} />
-        </View>
         <ScrollView
           horizontal
           scrollEventThrottle={1}
@@ -290,33 +263,10 @@ const Mapa = () => {
                 <Text numberOfLines={1} style={styles.cardtitle}>
                   {marker.title}
                 </Text>
-                <StarRating ratings={marker.rating} reviews={marker.reviews} />
                 <Text numberOfLines={1} style={styles.cardDescription}>
                   {marker.description}
                 </Text>
-                <View style={styles.button}>
-                  <TouchableOpacity
-                    onPress={() => {}}
-                    style={[
-                      styles.signIn,
-                      {
-                        borderColor: "#FF6347",
-                        borderWidth: 1,
-                      },
-                    ]}
-                  >
-                    <Text
-                      style={[
-                        styles.textSign,
-                        {
-                          color: "#FF6347",
-                        },
-                      ]}
-                    >
-                      Order Now
-                    </Text>
-                  </TouchableOpacity>
-                </View>
+                
               </View>
             </View>
           ))}
@@ -358,11 +308,12 @@ const styles = StyleSheet.create({
   },
   chipsItem: {
     flexDirection: "row",
-    backgroundColor: "#fff",
+    backgroundColor: "#4F81C7",
     borderRadius: 20,
     padding: 8,
     paddingHorizontal: 20,
     marginHorizontal: 10,
+    marginTop:15,
     height: 35,
     shadowColor: "#ccc",
     shadowOffset: { width: 0, height: 3 },

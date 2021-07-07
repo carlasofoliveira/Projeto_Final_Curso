@@ -11,16 +11,20 @@ import {
 } from "react-native";
 import Carousel from "simple-carousel-react-native";
 
+
 export default function Home({ navigation }) {
   return (
     <View style={styles.container}>
       <ScrollView style={styles.ScrollView}>
-      <Button
+        <View>
+          <Button
           style={styles.buttonmap}
           title="ver Mapa"
           onPress={() => navigation.navigate("Mapa")}
         />
-        <View>
+        </View>
+      
+        <View style={styles.backcarousel}>
           <Carousel showBubbles={false} style={styles.tamcarrossel}>
             <View style={styles.fundcarrosel}>
               <Image style={styles.tam} source={require("../pic/evento.jpg")} />
@@ -445,6 +449,10 @@ const styles = StyleSheet.create({
     paddingRight: 6,
     marginTop: 20,
   },
+   buttonmap: {
+    backgroundColor:"blue",
+    marginBottom:55,
+  },
   content: {
     backgroundColor: "#EEF5FF",
   },
@@ -455,7 +463,7 @@ const styles = StyleSheet.create({
     color: "black",
   },
   back: {
-    backgroundColor: "#EEF5FF",
+    backgroundColor: "blue",
   },
   Chevron: {
     tintColor: "#EEF5FF",
@@ -467,7 +475,7 @@ const styles = StyleSheet.create({
     marginTop: 9,
     width: 350,
     height: 200,
-    borderRadius: 10,
+    borderRadius: 25,
    
   },
   esp: {
@@ -477,20 +485,11 @@ const styles = StyleSheet.create({
     color: "black",
   },
 
-  fundcarrosel: {
-    backgroundColor: "white",
-    borderRadius: 10,
-  },
+  
   titulo: {
     fontSize: 20,
     marginTop: 20,
     marginLeft: 20,
     color: "black",
-  },
-  
-  buttonmap: {
-    paddingRight:55,
-    marginTop:5,
-    height:5,
   },
 });

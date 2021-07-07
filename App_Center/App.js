@@ -5,7 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./screens/Home";
 import Novo_Evento from "./adelementos/Novo_Evento";
-import Nova_Entidade from "./adelementos/Nova_entidade";
+import Nova_Entidade from "./adelementos/Nova_Entidade";
 import Ideias from "./screens/Ideia";
 import adicionar_Ideias from "./adelementos/Ideia";
 import AdicionarLista from "./screens/Adicionar";
@@ -32,6 +32,7 @@ import definicoes from "./adelementos/definicoes";
 import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 import { Button, TouchableOpacity, Image, StyleSheet } from "react-native";
 import { IconButton, Colors } from "react-native-paper";
+import SignUpView from "./adelementos/Criar_registo";
 //import SimpleImagePicker from "./adelementos/SimpleImagePicker";
 //import imagepickerground from "./adelementos/SimpleImagePicker";
 
@@ -56,7 +57,7 @@ function getHeaderTitle(route) {
     case "Notificacoes":
       return "Notificações";
     default:
-      return "Nome Indeterminado";
+      return "";
   }
 }
 
@@ -158,7 +159,7 @@ const App = () => {
               />
             ),
             headerLeft: () => (
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() => navigationRef.current?.navigate("Home")}>
                 <Image
                   source={require("./assets/logotipo_appcenter.png")}
                   
@@ -195,6 +196,15 @@ const App = () => {
             headerStyle: {
               backgroundColor: "#4F81C7",
             },
+            headerLeft: () => (
+              <TouchableOpacity onPress={() => navigationRef.current?.navigate("Home")}>
+                <Image
+                  source={require("./assets/logotipo_appcenter.png")}
+                  
+                  style={styles.logoappcenter}
+                />
+              </TouchableOpacity>
+            ),
           }}
         />
         <Stack.Screen
@@ -383,6 +393,18 @@ const App = () => {
         <Stack.Screen
           name="Login"
           component={Login}
+          options={{
+            headerTitleStyle: {
+              color: "white",
+            },
+            headerStyle: {
+              backgroundColor: "#4F81C7",
+            },
+          }}
+        />
+        <Stack.Screen
+          name="Criar Registo"
+          component={SignUpView}
           options={{
             headerTitleStyle: {
               color: "white",

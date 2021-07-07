@@ -14,7 +14,7 @@ export default function registo({ navigation }) {
       </View>
 
       <View style={styles.buttonContainer1}>
-        <Button title="Criar" onPress={() => navigation.navigate("Login")} />
+        <Button title="Criar" onPress={() => navigation.navigate("Criar Registo")} />
       </View>
       <View>
         <SocialIcon
@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#4F81C7",
   },
   buttonContainer: {
-    backgroundColor: "white",
+    
     color: "#4F81C7",
     width: 130,
     height: 36,
@@ -55,7 +55,7 @@ const styles = StyleSheet.create({
   buttonContainer1: {
     width: 130,
     height: 36,
-    borderRadius: 50,
+    borderRadius: 75,
     paddingLeft: 25,
     marginRight: -260,
     marginTop: -250,
