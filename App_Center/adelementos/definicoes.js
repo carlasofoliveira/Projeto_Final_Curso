@@ -4,8 +4,8 @@ import { StyleSheet, Text, View, TextInput } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { ListItem } from "react-native-elements";
 import { ScrollView } from "react-native";
-import {  Divider, } from "react-native-paper";
-
+import { Divider } from "react-native-paper";
+import { IconButton, Colors } from "react-native-paper";
 
 const list = [
   {
@@ -33,45 +33,50 @@ export default function Nova_Entidade({ navigation }) {
       <View style={styles.container}>
         <View style={styles.backgroundimage}>
           <View style={styles.Imageinsert}>
-        <LinearGradient
-          colors={["#E3CEF6", "#CEF6EC"]}
-          start={{
-            x: 0,
-            y: 0,
-          }}
-          end={{
-            x: 1,
-            y: 1,
-          }}
-          style={styles.box}
-        />
-      </View>
-      <Text style={styles.Nomepessoa}>
-        Nome da pessoa
-      </Text>
+            <LinearGradient
+              colors={["#E3CEF6", "#CEF6EC"]}
+              start={{
+                x: 0,
+                y: 0,
+              }}
+              end={{
+                x: 1,
+                y: 1,
+              }}
+              style={styles.box}
+            />
+          </View>
+          <Text style={styles.Nomepessoa}>Nome da pessoa</Text>
         </View>
-      
-      <Divider style={styles.divider} />
+        <View>
+          <IconButton
+            style={styles.edit}
+            icon="pencil"
+            size={35}
+            onPress={() => navigation.navigate("Pos registo")}
+          />
+          
+        </View>
+        <Divider style={styles.divider} />
         <Divider />
-      <View>
-        {list.map((item, i) => (
-          <ListItem 
-          containerStyle={{backgroundColor:"#EEF5FF"}}
-            key={i}
-            bottomDivider
-            button
-            onPress={() => navigation.navigate(item.component)}
-          >
-            <ListItem.Title style={styles.listitem} >
-              {item.title}
-            </ListItem.Title>
-            <ListItem.Chevron />
-          </ListItem>
-        ))}
+        <View>
+          {list.map((item, i) => (
+            <ListItem
+              containerStyle={{ backgroundColor: "#EEF5FF" }}
+              key={i}
+              bottomDivider
+              button
+              onPress={() => navigation.navigate(item.component)}
+            >
+              <ListItem.Title style={styles.listitem}>
+                {item.title}
+              </ListItem.Title>
+              <ListItem.Chevron />
+            </ListItem>
+          ))}
+        </View>
       </View>
-    </View>
     </ScrollView>
-    
   );
 }
 
@@ -90,7 +95,7 @@ const styles = StyleSheet.create({
   Imageinsert: {
     paddingTop: 100,
     paddingHorizontal: 30,
-    marginLeft:11,
+    marginLeft: 11,
   },
   box: {
     width: 300,
@@ -150,24 +155,38 @@ const styles = StyleSheet.create({
     marginLeft: 30,
     paddingLeft: -5,
   },
-  scroll:{
+  scroll: {
     backgroundColor: "#EEF5FF",
   },
-  divider:{
-marginTop:65,
+  divider: {
+    marginTop: 10,
   },
-  backgroundimage:{
-    backgroundColor:"#4F81C7",
-    paddingBottom:57,
-    marginRight:-7,
-    marginLeft:-10,
+  backgroundimage: {
+    backgroundColor: "#4F81C7",
+    paddingBottom: 57,
+    marginRight: -7,
+    marginLeft: -10,
   },
-  Nomepessoa:{
-    color:"#FFFFFF",
-    marginLeft:104,
-    marginTop:20,
-  }, 
-  listitem:{
-color:"#345481",
+  Nomepessoa: {
+    color: "#FFFFFF",
+    marginLeft: 104,
+    marginTop: 20,
+  },
+  listitem: {
+    color: "#345481",
+  },
+  edit: {
+    color: "#a9a9a9",
+    position: "relative",
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    marginBottom:15,
+  },
+  logout: {
+    position: "relative",
+    flexDirection: 'row',
+   marginLeft:255,
+   justifyContent: 'center', 
+   alignItems: 'center',
   },
 });

@@ -9,23 +9,28 @@ import {
   Image,
   Alert
 } from 'react-native';
+import { useEffect, useState } from 'react';
+import { makeRegistration } from "../adelementos/API_Calls";
 
-export default class SignUpView extends Component {
-
-  constructor(props) {
-    super(props);
-    state = {
-      fullName: '',
-      email   : '',
-      password: '',
-    }
-  }
+export default function SignUpView () {
+  const [userName, setUsername] = useState(null);
+  const [password, setPassword] = useState(null);
+  const [email, setEmail] = useState(null);
 
   onClickListener = (viewId) => {
-    Alert.alert("Alert", "Button pressed "+viewId);
+    //Alert.alert("Alert", "Button pressed "+viewId);
+    makeRegistration(userName, email, password).then((resposta) => {
+      console.log("resposta", resposta);
+      if (resposta.registado == true){
+        Alert.alert("Registado com sucesso");
+      }
+      else{
+        Alert.alert("Falha no registo");
+      }
+    });
   }
-
-  render() {
+ 
+  
     return (
       <View style={styles.container}>
         <View style={styles.inputContainer}>
@@ -34,7 +39,8 @@ export default class SignUpView extends Component {
               placeholder="Nome Completo"
               keyboardType="email-address"
               underlineColorAndroid='transparent'
-              onChangeText={(fullName) => this.setState({fullName})}/>
+              onChangeText={(fullName) => setUsername(fullName)}/>
+        
         </View>
 
         <View style={styles.inputContainer}>
@@ -43,7 +49,7 @@ export default class SignUpView extends Component {
               placeholder="Email"
               keyboardType="email-address"
               underlineColorAndroid='transparent'
-              onChangeText={(email) => this.setState({email})}/>
+              onChangeText={(email) => setEmail(email)}/>
         </View>
         
         <View style={styles.inputContainer}>
@@ -52,15 +58,15 @@ export default class SignUpView extends Component {
               placeholder="Password"
               secureTextEntry={true}
               underlineColorAndroid='transparent'
-              onChangeText={(password) => this.setState({password})}/>
+              onChangeText={(password) => setPassword(password)}/>
         </View>
 
-        <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => this.onClickListener('sign_up')}>
+        <TouchableHighlight  style={[styles.buttonContainer, styles.signupButton]} onPress={() => onClickListener('sign_up')} >
           <Text style={styles.signUpText}>Sign up</Text>
         </TouchableHighlight>
+       
       </View>
     );
-  }
 }
 
 const styles = StyleSheet.create({
