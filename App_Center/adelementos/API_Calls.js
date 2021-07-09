@@ -2,7 +2,7 @@ var sha1 = require('sha1');
 
 
 
-export function isLoggedIn(userName, passWord) {
+export function isLoggedIn(email, passWord) {
     return fetch("http://deca-centerweb.ua.pt/login/", {
         method: "POST",
         headers: {
@@ -10,8 +10,8 @@ export function isLoggedIn(userName, passWord) {
           "Content-Type": "application/json",
         },
         body: JSON.stringify({
-          username: userName,
-          password: passWord,
+          email: email,
+          password: sha1(passWord),
         }),
       })
       .then(data => data.json())

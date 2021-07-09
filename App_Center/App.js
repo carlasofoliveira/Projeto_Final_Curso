@@ -56,6 +56,8 @@ function getHeaderTitle(route) {
       return "Guardados";
     case "Notificacoes":
       return "Notificações";
+    case "Criar_Registo":
+      return "Criar registo";
     default:
       return "";
   }
@@ -403,7 +405,7 @@ const App = () => {
           }}
         />
         <Stack.Screen
-          name="Criar Registo"
+          name="Criar_Registo"
           component={SignUpView}
           options={{
             headerTitleStyle: {

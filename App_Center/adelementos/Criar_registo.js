@@ -36,7 +36,7 @@ export default function SignUpView () {
         <View style={styles.inputContainer}>
           <Image style={styles.inputIcon} source={{uri: 'https://png.icons8.com/male-user/ultraviolet/50/3498db'}}/>
           <TextInput style={styles.inputs}
-              placeholder="Nome Completo"
+              placeholder="Nome "
               keyboardType="email-address"
               underlineColorAndroid='transparent'
               onChangeText={(fullName) => setUsername(fullName)}/>

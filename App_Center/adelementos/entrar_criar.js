@@ -14,7 +14,7 @@ export default function registo({ navigation }) {
       </View>
 
       <View style={styles.buttonContainer1}>
-        <Button title="Criar" onPress={() => navigation.navigate("Criar Registo")} />
+        <Button title="Criar" onPress={() => navigation.navigate("Criar_Registo")} />
       </View>
       <View>
         <SocialIcon

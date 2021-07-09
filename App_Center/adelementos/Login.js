@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import {
   StyleSheet,
   Text,
@@ -6,14 +6,34 @@ import {
   TextInput,
   TouchableOpacity,
 } from "react-native";
+import { isLoggedIn } from "../adelementos/API_Calls";
 import { SocialIcon } from "react-native-elements";
+import { Alert } from "react-native";
+import GLOBAL from "../global"
 
-export default class Login extends React.Component {
-  state = {
-    email: "",
-    password: "",
-  };
-  render() {
+export default function Login ({ navigation }) {
+  const [password, setPassword] = useState(null);
+  const [email, setEmail] = useState(null);
+  const [isUserLogged, setLoginData] = useState(false);
+  
+
+  onClickListener = (viewId) => {
+    isLoggedIn(email, password).then((isLogged) => {
+      console.log("isLogged", isLogged.logado);
+      setLoginData(isLogged.logado);
+      if (isLogged.logado) {
+        Alert.alert("Login com sucesso");
+        GLOBAL.PASSWORD = password;
+        GLOBAL.EMAIL = email;
+        navigation.navigate("Inicio");
+      }
+      else{
+        Alert.alert("Login sem sucesso");
+        GLOBAL.PASSWORD = null;
+        GLOBAL.EMAIL = null;
+      }
+    });
+  }
     return (
       <View style={styles.container}>
         <Text style={styles.logo}>Login</Text>
@@ -22,7 +42,7 @@ export default class Login extends React.Component {
             style={styles.inputText}
             placeholder="Email..."
             placeholderTextColor="#003f5c"
-            onChangeText={(text) => this.setState({ email: text })}
+            onChangeText={(text) => setEmail(text)}
           />
         </View>
         <View style={styles.inputView}>
@@ -31,22 +51,18 @@ export default class Login extends React.Component {
             style={styles.inputText}
             placeholder="Password..."
             placeholderTextColor="#003f5c"
-            onChangeText={(text) => this.setState({ password: text })}
+            onChangeText={(text) => setPassword(text)}
           />
         </View>
         <TouchableOpacity>
           <Text style={styles.forgot}>Forgot Password?</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={styles.loginBtn}>
+        <TouchableOpacity style={styles.loginBtn} onPress={() => onClickListener('Login')}>
           <Text style={styles.loginText}>LOGIN</Text>
-        </TouchableOpacity>
-        <TouchableOpacity>
-          <Text style={styles.loginText}>Signup</Text>
         </TouchableOpacity>
         <SocialIcon style={styles.buttonFacebook} title="Sign In With Facebook" button type="facebook" />
       </View>
     );
-  }
 }
 
 const styles = StyleSheet.create({

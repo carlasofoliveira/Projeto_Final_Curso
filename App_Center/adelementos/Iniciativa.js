@@ -14,7 +14,7 @@ import {
 import { LinearGradient } from "expo-linear-gradient";
 import { List, Divider, IconButton } from "react-native-paper";
 import Entrar_criar from "../adelementos/Entrar_criar";
-
+import GLOBAL from "../global"
 import Icon from "@mdi/react";
 import { mdiAccount } from "@mdi/js";
 
@@ -45,11 +45,19 @@ export default function adicionar_Iniciativas( {navigation} ) {
   const [isUserLogged, setLoginData] = useState(true);
 
   useEffect(() => {
-    setLoading(false);
-    isLoggedIn("test1", "xpto").then((isLogged) => {
+    console.log("email: ", GLOBAL.EMAIL);
+    if (GLOBAL.EMAIL !== null && GLOBAL.PASSWORD !== null){
+      isLoggedIn(GLOBAL.EMAIL, GLOBAL.PASSWORD).then((isLogged) => {
       console.log("isLogged", isLogged.logado);
       setLoginData(isLogged.logado);
-    });
+      setLoading(false);
+      });
+    }
+    else{
+      setLoginData(false);
+      setLoading(false);
+    }
+    
   }, []);
 
 
@@ -186,7 +194,8 @@ export default function adicionar_Iniciativas( {navigation} ) {
             </View>
          </ScrollView>
         ) : (
-          <Entrar_criar/>
+          <Entrar_criar navigation={navigation}
+          />
         ),
       ]
     )}
