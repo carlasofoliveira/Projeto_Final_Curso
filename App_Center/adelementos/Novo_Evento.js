@@ -1,24 +1,24 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState, useEffect, } from "react";
-import { isLoggedIn } from "../adelementos/API_Calls";
+import React, { useState } from "react";
 import { StyleSheet, Text, View, TextInput, Switch, Image } from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { List, Divider, IconButton } from "react-native-paper";
 import Carousel from "simple-carousel-react-native";
-import { ScrollView, ActivityIndicator, } from "react-native";
-import Entrar_criar from "../adelementos/Entrar_criar";
+import { ScrollView } from "react-native";
+
 import Icon from "@mdi/react";
 import { mdiAccount } from "@mdi/js";
 //  import { Card, CardTitle, CardContent, CardAction, CardButton, CardImage } from 'react-native-material-cards'
 
 //import { Switch } from 'react-native-paper';
 import DatePicker from "react-native-modern-datepicker";
-//import DropDownItem from "react-native-drop-down-item";
 
 export default function Novo_Evento() {
   const [input, setInput] = React.useState("");
   const [shouldShow1, setShouldShow1] = useState(false);
   const [shouldShow2, setShouldShow2] = useState(false);
+  const [shouldShow3, setShouldShow3] = useState(false);
+  const [shouldShow4, setShouldShow4] = useState(false);
 
   const [isEnabled1, setIsEnabled1] = useState(false);
   const alternarSwitch1 = () => {
@@ -35,243 +35,278 @@ export default function Novo_Evento() {
   const [isEnabled3, setIsEnabled3] = useState(false);
   const alternarSwitch3 = () => {
     setIsEnabled3((previousState) => !previousState);
+    setShouldShow3(!shouldShow3);
   };
 
   const [isEnabled4, setIsEnabled4] = useState(false);
   const alternarSwitch4 = () => {
     setIsEnabled4((previousState) => !previousState);
+    setShouldShow4(!shouldShow4);
   };
 
-  const [isLoading, setLoading] = useState(true);
-  const [isUserLogged, setLoginData] = useState(true);
-
-  useEffect(() => {
-    setLoading(false);
-    isLoggedIn("test1", "xpto").then((isLogged) => {
-      console.log("isLogged", isLogged.logado);
-      setLoginData(isLogged.logado);
-    });
-  }, []);
-
-
   return (
-    <View style={{ flex: 1 }}>
-       {isLoading ? (
-        <ActivityIndicator />
-      ) : (
-        [
-          isUserLogged ? (
-        <ScrollView style={styles.ScrollView}>
-
-        <View style={styles.Imageinsert}>
-          <LinearGradient
-            colors={["#E3CEF6", "#CEF6EC"]}
-            start={{
-              x: 0,
-              y: 0,
-            }}
-            end={{
-              x: 1,
-              y: 1,
-            }}
-            style={styles.box}
-          />
-        </View>
-        <Text style={styles.textitlefirst}> Designação ou Nome* </Text>
-        <StatusBar style="auto" />
-        <TextInput
-          style={styles.input}
-          onChangeText={(text) => setInput(text)}
-          onSubmitEditing={() => {
-            setInput("");
+    <ScrollView style={styles.ScrollView}>
+      <View style={styles.Imageinsert}>
+        <LinearGradient
+          colors={["#E3CEF6", "#CEF6EC"]}
+          start={{
+            x: 0,
+            y: 0,
           }}
-            placeholder="inserir designação..."
+          end={{
+            x: 1,
+            y: 1,
+          }}
+          style={styles.box}
+        />
+      </View>
+      <Text style={styles.textitlefirst}> Designação ou Nome* </Text>
+      <StatusBar style="auto" />
+      <TextInput
+        style={styles.input}
+        onChangeText={(text) => setInput(text)}
+        onSubmitEditing={() => {
+          setInput("");
+        }}
+        placeholder="inserir designação..."
+      />
+      <Divider />
+      <Divider />
+      <List.AccordionGroup style={styles.Accordion}>
+        <Text style={styles.esq}>
+          <List.Accordion title="Descrição" id="1">
+            <TextInput
+              style={styles.input}
+              onChangeText={(text) => setInput(text)}
+              onSubmitEditing={() => {
+                setInput("");
+              }}
+              placeholder="inserir descrição..."
             />
-            <Divider />
+          </List.Accordion>
+        </Text>
         <Divider />
-        <List.AccordionGroup style={styles.Accordion}>
-          <Text style={styles.esq}>
-            <List.Accordion title="Descrição" id="1"style={{color:"#345481"}}>
-              <TextInput
-                style={styles.input}
-                onChangeText={(text) => setInput(text)}
-                onSubmitEditing={() => {
-                  setInput("");
-                }}
-                placeholder="inserir descrição..."
-              />
-            </List.Accordion>
+        <Divider />
+        <Text style={styles.esq}>
+          <List.Accordion title="Local" id="2">
+            <TextInput
+              style={styles.input}
+              onChangeText={(text) => setInput(text)}
+              onSubmitEditing={() => {
+                setInput("");
+              }}
+              placeholder="inserir local..."
+            />
+          </List.Accordion>
+        </Text>
+      </List.AccordionGroup>
+      <Divider />
+      <Divider />
+
+      <View style={({ marginBottom: 28 }, { marginRight: 30 })}>
+        <View style={{ width: 270 }}>
+          <Text style={{ fontSize: 15, marginTop: 25, left: 18 }}>
+            {"apresentar data/período"}
           </Text>
-          <Divider />
-          <Divider />
-          <Text style={styles.esq}>
-            <List.Accordion title="Local" id="2">
-              <TextInput
-                style={styles.input}
-                onChangeText={(text) => setInput(text)}
-                onSubmitEditing={() => {
-                  setInput("");
-                }}
-                placeholder="inserir local..."
-              />
-            </List.Accordion>
+        </View>
+        <Switch
+          style={{ marginTop: -25, paddingBottom: -3 }}
+          trackColor={{ false: "#808080", true: "#4F81C7" }}
+          thumbColor={!isEnabled1 ? "#ffffff" : "#E5E5EA"}
+          onValueChange={alternarSwitch1}
+          value={isEnabled1}
+        />
+      </View>
+      {shouldShow1 ? (
+        <DatePicker
+          options={{
+            backgroundColor: "#FFFFFF",
+            textHeaderColor: "black",
+            textDefaultColor: "black",
+            selectedTextColor: "blue",
+            mainColor: "#96C2FF",
+            textSecondaryColor: "black",
+            borderColor: "rgba(122, 146, 165, 0.1)",
+          }}
+          current="2021-07-13"
+          selected="2021-07-23"
+          mode="calendar"
+          minuteInterval={30}
+          style={{ borderRadius: 20 }}
+        />
+      ) : (
+        false
+      )}
+      <View style={({ marginBottom: 28 }, { marginRight: 30 })}>
+        <View style={{ width: 270 }}>
+          <Text style={{ fontSize: 16, marginTop: 25, left: 18 }}>
+            {"convidar parceiros"}
           </Text>
-        </List.AccordionGroup>
-        <Divider />
-        <Divider />
-
-
-        <View style={({ marginBottom: 28 }, { marginRight: 30 })}>
-          <View style={{ width: 270 }}>
-            <Text style={{  marginTop: 25, left: 18 }}>
-              {"apresentar data/período"}
-            </Text>
-          </View>
-          <Switch
-            style={{ marginTop: -25, paddingBottom: -3 }}
-            trackColor={{ false: "#808080", true: "#4F81C7" }}
-            thumbColor={!isEnabled1 ? "#ffffff" : "#E5E5EA"}
-            onValueChange={alternarSwitch1}
-            value={isEnabled1}
-          />
         </View>
-        {shouldShow1 ? (
-          <DatePicker
-            options={{
-              backgroundColor: "#FFFFFF",
-              textHeaderColor: "black",
-              textDefaultColor: "black",
-              selectedTextColor: "blue",
-              mainColor: "#96C2FF",
-              textSecondaryColor: "black",
-              borderColor: "rgba(122, 146, 165, 0.1)",
-            }}
-            current="2021-07-13"
-            selected="2021-07-23"
-            mode="calendar"
-            minuteInterval={30}
-            style={{ borderRadius: 20 }}
-          />
-        ) : (
-          false
-        )}
-        <View style={({ marginBottom: 28 }, { marginRight: 30 })}>
-          <View style={{ width: 270 }}>
-            <Text style={{ fontSize: 16, marginTop: 25, left: 18 }}>
-              {"convidar parceiros"}
-            </Text>
-          </View>
-          <Switch
-            style={{ marginTop: -25 }}
-            trackColor={{ false: "#808080", true: "#4F81C7" }}
-            thumbColor={!isEnabled2 ? "#ffffff" : "#FFFFFF"}
-            onValueChange={alternarSwitch2}
-            value={isEnabled2}
-          />
-        </View>
+        <Switch
+          style={{ marginTop: -25 }}
+          trackColor={{ false: "#808080", true: "#4F81C7" }}
+          thumbColor={!isEnabled2 ? "#ffffff" : "#FFFFFF"}
+          onValueChange={alternarSwitch2}
+          value={isEnabled2}
+        />
+      </View>
 
-        {shouldShow2 ? (
+      {shouldShow2 ? (
+        <View>
+          <Carousel showBubbles={false} style={styles.tamcarrossel} height={75}>
+            <View style={styles.fundcarrosel}>
+              <Text style={styles.titulo}>Oferta</Text>
+              <Text style={{ alignSelf: "flex-start" }}>Assistente Médico</Text>
+              <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                Aveiro
+              </Text>
+            </View>
+            <View style={styles.fundcarrosel}>
+              <Text style={{ alignSelf: "flex-start" }} style={styles.titulo}>
+                Oferta
+              </Text>
+              <Text style={{ alignSelf: "flex-start" }}>
+                Assistente Veterinário
+              </Text>
+              <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                Aveiro
+              </Text>
+            </View>
+
+            <View style={styles.fundcarrosel}>
+              <Text style={{ alignSelf: "flex-start" }} style={styles.titulo}>
+                Oferta
+              </Text>
+              <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                Aveiro
+              </Text>
+              <Text style={styles.esp}>Animador</Text>
+            </View>
+          </Carousel>
+        </View>
+      ) : (
+        false
+      )}
+      <View style={({ marginBottom: 28 }, { marginRight: 30 })}>
+        <View style={{ width: 270 }}>
+          <Text style={{ fontSize: 16, marginTop: 25, left: 18 }}>
+            {"solicitar parceiros"}
+          </Text>
+        </View>
+        <Switch
+          style={{ marginTop: -25 }}
+          trackColor={{ false: "#808080", true: "#4F81C7" }}
+          thumbColor={!isEnabled2 ? "#ffffff" : "#FFFFFF"}
+          onValueChange={alternarSwitch3}
+          value={isEnabled3}
+        />
+      </View>
+
+      {shouldShow3 ? (
+        <View>
+          <Carousel showBubbles={false} style={styles.tamcarrossel} height={75}>
+            <View style={styles.fundcarrosel}>
+              <Text style={styles.titulo}>Oferta</Text>
+              <Text style={{ alignSelf: "flex-start" }}>Assistente Médico</Text>
+              <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                Aveiro
+              </Text>
+            </View>
+            <View style={styles.fundcarrosel}>
+              <Text style={{ alignSelf: "flex-start" }} style={styles.titulo}>
+                Oferta
+              </Text>
+              <Text style={{ alignSelf: "flex-start" }}>
+                Assistente Veterinário
+              </Text>
+              <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                Aveiro
+              </Text>
+            </View>
+
+            <View style={styles.fundcarrosel}>
+              <Text style={{ alignSelf: "flex-start" }} style={styles.titulo}>
+                Oferta
+              </Text>
+              <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
+                Aveiro
+              </Text>
+              <Text style={styles.esp}>Animador</Text>
+            </View>
+          </Carousel>
+        </View>
+      ) : (
+        false
+      )}
+      <View style={({ marginBottom: 28 }, { marginRight: 30 })}>
+        <View style={{ width: 200 }}>
+          <Text style={{ fontSize: 16, marginTop: 25, left: 18 }}>
+            {"solicitar voluntários"}
+          </Text>
+        </View>
+        {shouldShow4 ? (
           <View>
-            <Carousel showBubbles={false} style={styles.tamcarrossel}>
+            <Carousel
+              showBubbles={false}
+              style={styles.tamcarrossel}
+              height={75}
+            >
               <View style={styles.fundcarrosel}>
-                <Image
-                  style={styles.tam}
-                  source={require("../pic/evento.jpg")}
-                />
-                <Text style={{ alignSelf: "flex-start" }} style={styles.titulo}>
-                  Bailarico do bairro
+                <Text style={styles.titulo}>Oferta</Text>
+                <Text style={{ alignSelf: "flex-start" }}>
+                  Assistente Médico
                 </Text>
                 <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
                   Aveiro
-                </Text>
-                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
-                  10 Maio
                 </Text>
               </View>
               <View style={styles.fundcarrosel}>
-                <Image
-                  style={styles.tam}
-                  source={require("../pic/evento.jpg")}
-                />
                 <Text style={{ alignSelf: "flex-start" }} style={styles.titulo}>
-                  Bailarico do bairro
+                  Oferta
+                </Text>
+                <Text style={{ alignSelf: "flex-start" }}>
+                  Assistente Veterinário
                 </Text>
                 <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
                   Aveiro
-                </Text>
-                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
-                  10 Maio
                 </Text>
               </View>
 
               <View style={styles.fundcarrosel}>
-                <Image
-                  style={styles.tam}
-                  source={require("../pic/evento.jpg")}
-                />
                 <Text style={{ alignSelf: "flex-start" }} style={styles.titulo}>
-                  Bailarico do bairro
+                  Oferta
                 </Text>
                 <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
                   Aveiro
                 </Text>
-                <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
-                  10 Maio
-                </Text>
+                <Text style={styles.esp}>Animador</Text>
               </View>
             </Carousel>
           </View>
         ) : (
           false
         )}
-        <View style={({ marginBottom: 28 }, { marginRight: 30 })}>
-          <View style={{ width: 270 }}>
-            <Text style={{ fontSize: 16, marginTop: 25, left: 18 }}>
-              {"solicitar recursos"}
-            </Text>
-          </View>
-          <Switch
-            style={{ marginTop: -25 }}
-            trackColor={{ false: "#808080", true: "#4F81C7" }}
-            thumbColor={!isEnabled3 ? "#ffffff" : "#FFFFFF"}
-            onValueChange={alternarSwitch3}
-            value={isEnabled3}
-          />
-        </View>
-        <View style={({ marginBottom: 28 }, { marginRight: 30 })}>
-          <View style={{ width: 200 }}>
-            <Text style={{ fontSize: 16, marginTop: 25, left: 18 }}>
-              {"solicitar voluntários"}
-            </Text>
-          </View>
-          <Switch
-            style={{ marginTop: -25 }}
-            trackColor={{ false: "#808080", true: "#4F81C7" }}
-            thumbColor={!isEnabled4 ? "#ffffff" : "#FFFFFF"}
-            onValueChange={alternarSwitch4}
-            value={isEnabled4}
-          />
-        </View>
-        <View style={styles.headerFooterStyle}>
-          <IconButton
-            style={styles.iconbutton}
-            icon="check-circle"
-            color={"gray"}
-            size={45}
-            onPress={() => console.log("Pressed")}
-          />
-        </View>
-
-        </ScrollView> 
-        ) : (
-          <Entrar_criar/>
-        ),
-      ]
-    )} 
-    </ View>
-);
+        <Switch
+          style={{ marginTop: -25 }}
+          trackColor={{ false: "#808080", true: "#4F81C7" }}
+          thumbColor={!isEnabled4 ? "#ffffff" : "#FFFFFF"}
+          onValueChange={alternarSwitch4}
+          value={isEnabled4}
+        />
+      </View>
+      <View style={styles.headerFooterStyle}>
+        <IconButton
+          style={styles.iconbutton}
+          icon="check-circle"
+          color={"gray"}
+          size={45}
+          onPress={() => console.log("Pressed")}
+        />
+      </View>
+    </ScrollView>
+  );
 }
-
 
 const styles = StyleSheet.create({
   container: {
@@ -285,8 +320,10 @@ const styles = StyleSheet.create({
   esq: {
     textAlign: "left",
   },
+
   Imageinsert: {
     paddingTop: -25,
+    paddingHorizontal: 30,
   },
   box: {
     width: 300,
@@ -309,20 +346,15 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   textitlefirst: {
+    textAlign: "center",
     fontSize: 25,
     fontWeight: "bold",
-    color: "gray",
+    color: "black",
     paddingBottom: 10,
     marginTop: 25,
-    marginLeft: 25,
+    marginLeft: 0,
   },
-  texsecondtitle: {
-    fontSize: 25,
-    fontWeight: "bold",
-    marginTop: 20,
-    marginLeft: 25,
-    color: "gray",
-  },
+
   input: {
     backgroundColor: "white",
     fontSize: 16,
@@ -337,21 +369,18 @@ const styles = StyleSheet.create({
     marginBottom: 15,
     borderColor: "#FFFFFF",
   },
-  texttitlesecond: {
-    fontSize: 25,
-    fontWeight: "bold",
-    color: "gray",
-    paddingBottom: 5,
-    marginTop: 5,
-    marginLeft: 25,
-  },
-  content:{
+  content: {
     backgroundColor: "#EEF5FF",
-    paddingBottom: 5,
-    marginTop: 5,
-    marginLeft: 10,
   },
-
+  ListItem: {
+    color: "black",
+  },
+  preto: {
+    color: "black",
+  },
+  back: {
+    backgroundColor: "#EEF5FF",
+  },
   Chevron: {
     tintColor: "#EEF5FF",
   },
@@ -359,10 +388,8 @@ const styles = StyleSheet.create({
     marginTop: 20,
   },
   tam: {
-    width: 350,
-    height: 200,
+    height: 50,
     borderRadius: 10,
-    marginTop: -45,
   },
   esp: {
     marginTop: 15,
@@ -370,21 +397,23 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     color: "black",
   },
-
+  tamcarrossel: {
+    height: 50,
+    marginBottom: -1,
+    paddingBottom: 0,
+  },
   fundcarrosel: {
     backgroundColor: "white",
     borderRadius: 5,
-    paddingTop: 50,
   },
   titulo: {
     fontSize: 20,
-    marginTop: 20,
-    marginLeft: 20,
-    color: "black",
+    marginTop: 5,
+    paddingLeft: 15,
+    color: "white",
+    backgroundColor: "#A16623",
   },
-  tamcarrossel: {
-    height: 200,
-  },
+
   headerFooterStyle: {
     width: 700,
     marginTop: 400,
@@ -396,8 +425,5 @@ const styles = StyleSheet.create({
     marginLeft: 170,
     marginTop: -10,
     position: "relative",
-  },
-  listaccordion:{
-color:"#345481",
   },
 });
