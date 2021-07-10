@@ -32,3 +32,18 @@ export function makeRegistration(username, email, password){
   })
   .then(data => data.json())
 }
+
+
+export function solicitarvoluntario(pedirvoluntario){
+  return fetch ("http://deca-centerweb.ua.pt/voluntario", {
+    method: "POST",
+    headers:{
+      Accept:"aplication/json", 
+      "Content-Type": "application/json",
+    },
+    body:JSON.stringify({
+      voluntario: pedirvoluntario,
+    }),
+  })
+  .then(data => data.json())
+}

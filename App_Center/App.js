@@ -5,7 +5,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import Home from "./screens/Home";
 import Novo_Evento from "./adelementos/Novo_Evento";
-import Nova_Entidade from "./adelementos/Nova_Entidade";
+import Nova_entidade from "./adelementos/Entidade_nova";
 import Ideias from "./screens/Ideia";
 import adicionar_Ideias from "./adelementos/Ideia";
 import AdicionarLista from "./screens/Adicionar";
@@ -223,7 +223,7 @@ const App = () => {
         />
         <Stack.Screen
           name="Nova entidade"
-          component={Nova_Entidade}
+          component={Nova_entidade}
           options={{
             headerTitleStyle: {
               color: "white",

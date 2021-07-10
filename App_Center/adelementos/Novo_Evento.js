@@ -1,10 +1,14 @@
 import { StatusBar } from "expo-status-bar";
-import React, { useState } from "react";
-import { StyleSheet, Text, View, TextInput, Switch, Image } from "react-native";
+import React, {  useEffect, useState } from "react";
+import { isLoggedIn } from "../adelementos/API_Calls";
+import { StyleSheet, Text, View, TextInput, Switch, Image, ActivityIndicator,  TouchableHighlight} from "react-native";
 import { LinearGradient } from "expo-linear-gradient";
 import { List, Divider, IconButton } from "react-native-paper";
 import Carousel from "simple-carousel-react-native";
 import { ScrollView } from "react-native";
+import Entrar_criar from "../adelementos/Entrar_criar";
+import GLOBAL from "../global"
+import { solicitarvoluntario } from "../adelementos/API_Calls";
 
 import Icon from "@mdi/react";
 import { mdiAccount } from "@mdi/js";
@@ -13,7 +17,7 @@ import { mdiAccount } from "@mdi/js";
 //import { Switch } from 'react-native-paper';
 import DatePicker from "react-native-modern-datepicker";
 
-export default function Novo_Evento() {
+export default function Novo_Evento({navigation}) {
   const [input, setInput] = React.useState("");
   const [shouldShow1, setShouldShow1] = useState(false);
   const [shouldShow2, setShouldShow2] = useState(false);
@@ -44,7 +48,47 @@ export default function Novo_Evento() {
     setShouldShow4(!shouldShow4);
   };
 
+  const [isLoading, setLoading] = useState(true);
+  const [isUserLogged, setLoginData] = useState(true);
+
+  const [pedirvoluntario, setVoluntario] = useState(null);
+
+  onClickListener = (viewId) => {
+    //Alert.alert("Alert", "Button pressed "+viewId);
+    solicitarvoluntario(pedirvoluntario).then((resposta) => {
+      console.log("resposta", resposta);
+      if (resposta.solicitadovoluntario == true){
+        
+      }
+      else{
+      
+      }
+    });
+  }
+ 
+useEffect(() => {
+    console.log("email: ", GLOBAL.EMAIL);
+    if (GLOBAL.EMAIL !== null && GLOBAL.PASSWORD !== null){
+      isLoggedIn(GLOBAL.EMAIL, GLOBAL.PASSWORD).then((isLogged) => {
+      console.log("isLogged", isLogged.logado);
+      setLoginData(isLogged.logado);
+      setLoading(false);
+      });
+    }
+    else{
+      setLoginData(false);
+      setLoading(false);
+    }
+    
+  }, []);
+
   return (
+    <View style={{ flex: 1 }}>
+    {isLoading ? (
+      <ActivityIndicator />
+    ) : (
+      [
+        isUserLogged ? (
     <ScrollView style={styles.ScrollView}>
       <View style={styles.Imageinsert}>
         <LinearGradient
@@ -191,7 +235,7 @@ export default function Novo_Evento() {
       <View style={({ marginBottom: 28 }, { marginRight: 30 })}>
         <View style={{ width: 270 }}>
           <Text style={{ fontSize: 16, marginTop: 25, left: 18 }}>
-            {"solicitar parceiros"}
+            {"solicitar recursos"}
           </Text>
         </View>
         <Switch
@@ -244,7 +288,17 @@ export default function Novo_Evento() {
           <Text style={{ fontSize: 16, marginTop: 25, left: 18 }}>
             {"solicitar voluntários"}
           </Text>
-        </View>
+          
+        </View> 
+        <Switch
+          style={{ marginTop: -25 }}
+          trackColor={{ false: "#808080", true: "#4F81C7" }}
+          thumbColor={!isEnabled4 ? "#ffffff" : "#FFFFFF"}
+          onValueChange={alternarSwitch4}
+          value={isEnabled4}
+        /> 
+       </View>
+        
         {shouldShow4 ? (
           <View>
             <Carousel
@@ -254,8 +308,8 @@ export default function Novo_Evento() {
             >
               <View style={styles.fundcarrosel}>
                 <Text style={styles.titulo}>Oferta</Text>
-                <Text style={{ alignSelf: "flex-start" }}>
-                  Assistente Médico
+                <Text style={{ alignSelf: "flex-start" }} >
+                  Assistente Médico 
                 </Text>
                 <Text style={styles.esp} style={{ alignSelf: "flex-end" }}>
                   Aveiro
@@ -283,18 +337,26 @@ export default function Novo_Evento() {
                 <Text style={styles.esp}>Animador</Text>
               </View>
             </Carousel>
+            
+            <View>
+              <TextInput
+              style={styles.solicitar}
+              onChangeText={(text) => setVoluntario(text)}
+              onSubmitEditing={() => {
+                setInput("");
+              }}
+              placeholder="procurar voluntários…"
+            />
+            <TouchableHighlight  style={[styles.buttonContainer, styles.signupButton]} onPress={() => onClickListener('sign_up')} >
+          <Text style={styles.signUpText}>solicitar</Text>
+        </TouchableHighlight>
+            </View>
           </View>
+          
+          
         ) : (
           false
         )}
-        <Switch
-          style={{ marginTop: -25 }}
-          trackColor={{ false: "#808080", true: "#4F81C7" }}
-          thumbColor={!isEnabled4 ? "#ffffff" : "#FFFFFF"}
-          onValueChange={alternarSwitch4}
-          value={isEnabled4}
-        />
-      </View>
       <View style={styles.headerFooterStyle}>
         <IconButton
           style={styles.iconbutton}
@@ -305,9 +367,15 @@ export default function Novo_Evento() {
         />
       </View>
     </ScrollView>
-  );
+  ) : (
+    <Entrar_criar navigation={navigation}
+    />
+  ),
+]
+)}
+</View> 
+);
 }
-
 const styles = StyleSheet.create({
   container: {
     flex: 1,
@@ -425,5 +493,33 @@ const styles = StyleSheet.create({
     marginLeft: 170,
     marginTop: -10,
     position: "relative",
+  },
+  solicitar:{
+    height: 40,
+    margin: 9,
+    borderWidth: 1,
+   backgroundColor:"#FFFFFF",
+   borderColor:"#FFFFFF",
+
+  },
+  convidar:{
+paddingLeft:100,
+borderRadius:100,
+height:45,
+  },
+  buttonContainer: {
+    height:45,
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft:150,
+    width:85,
+    borderRadius:30,
+  },
+  signupButton: {
+    backgroundColor: "#3B5998",
+  },
+  ignUpText: {
+    color: 'white',
   },
 });

@@ -375,7 +375,7 @@ export default function Home({ navigation }) {
             </List.Accordion>
           </Text>
           <Text style={styles.content}>
-            <List.Accordion title="Ideias" id="5">
+            <List.Accordion title="Destaques" id="5">
               <Carousel showBubbles={false} style={styles.tamcarrossel}>
                 <View style={styles.fundcarrosel}>
                   <Image
