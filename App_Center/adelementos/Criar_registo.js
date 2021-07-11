@@ -17,6 +17,8 @@ import { useEffect, useState } from "react";
 import { List, Divider, IconButton } from "react-native-paper";
 import { makeRegistration } from "../adelementos/API_Calls";
 
+import GLOBAL from "../global";
+
 import Icon from "@mdi/react";
 import { mdiAccount } from "@mdi/js";
 
@@ -43,14 +45,16 @@ const list = [
   },
 ];
 
-export default function SignUpView({ navigation }) {
+export default function SignUpView({ navigation }) { 
   const [userName, setUsername] = useState(null);
   const [password, setPassword] = useState(null);
   const [email, setEmail] = useState(null);
+ 
+
 
   onClickListener = (viewId) => {
     //Alert.alert("Alert", "Button pressed "+viewId);
-    makeRegistration(userName, email, password).then((resposta) => {
+    makeRegistration(userName, email, password, GLOBAL.registar, GLOBAL.setoratividade, GLOBAL.areainteresse).then((resposta) => {
       console.log("resposta", resposta);
       if (resposta.registado == true) {
         Alert.alert("Registado com sucesso");
@@ -109,7 +113,7 @@ export default function SignUpView({ navigation }) {
           placeholder="Inserir password"
         />
         <View>
-          <Text style={styles.texttitlesecond}> Tipo de Edentidade* </Text>
+          <Text style={styles.titleEntidade}> Tipo de Edentidade* </Text>
           {list.map((item, i) => (
             <ListItem
               containerStyle={{ backgroundColor: "#EEF5FF" }}
@@ -126,22 +130,12 @@ export default function SignUpView({ navigation }) {
             </ListItem>
           ))}
         </View>
-        <TouchableHighlight
-          style={[styles.buttonContainer, styles.signupButton]}
-          onPress={() => onClickListener("sign_up")}
-        >
+        <View style={styles.headerFooterStyle}>
+        <TouchableHighlight style={[styles.buttonContainer, styles.signupButton]} onPress={() => onClickListener('sign_up')}>
           <Text style={styles.signUpText}>Sign up</Text>
         </TouchableHighlight>
-      </ScrollView>
-      <View style={styles.headerFooterStyle}>
-        <IconButton
-          style={styles.iconbutton}
-          icon="check-circle"
-          color={"gray"}
-          size={45}
-          onPress={() => onClickListener("Login")}
-        />
       </View>
+      </ScrollView>
     </View>
   );
 }
@@ -187,31 +181,37 @@ const styles = StyleSheet.create({
     fontSize: 24,
   },
   titleinputNome: {
-    textAlign: "center",
-    fontSize: 25,
-    fontWeight: "bold",
+    textAlign: "left",
+    fontSize: 23,
     color: "black",
     paddingBottom: 10,
     marginTop: 20,
-    marginLeft: 0,
+    marginLeft:20,
   },
   titleEmail:{
-    textAlign: "center",
-    fontSize: 25,
-    fontWeight: "bold",
+    textAlign: "left",
+    fontSize: 23,
     color: "black",
     paddingBottom: 10,
     marginTop: 20,
-    marginLeft: 0,
+    marginLeft:20,
+
   },
   titletPassword:{
-    textAlign: "center",
-    fontSize: 25,
-    fontWeight: "bold",
+    textAlign: "left",
+    fontSize: 23,
     color: "black",
     paddingBottom: 10,
     marginTop: 20,
-    marginLeft: 0,
+    marginLeft:20,
+  },
+  titleEntidade:{
+    textAlign: "left",
+    fontSize: 23,
+    color: "black",
+    paddingBottom: 10,
+    marginTop: 20,
+    marginLeft:20,
   },
   inputNome: {
     backgroundColor: "white",
@@ -221,10 +221,11 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 12,
     padding: 1,
-    paddingLeft: 25,
+    paddingLeft: 30,
     marginTop: -5,
     marginRight: 16,
     marginBottom: 15,
+    marginLeft:20,
     borderColor: "#FFFFFF",
   },
   inputEmail: {
@@ -239,6 +240,7 @@ const styles = StyleSheet.create({
     marginTop: -5,
     marginRight: 16,
     marginBottom: 15,
+    marginLeft:20,
     borderColor: "#FFFFFF",
   },
   inputPassword: {
@@ -253,6 +255,7 @@ const styles = StyleSheet.create({
     marginTop: -5,
     marginRight: 16,
     marginBottom: 15,
+    marginLeft:20,
     borderColor: "#FFFFFF",
   },
   content: {
@@ -307,6 +310,7 @@ const styles = StyleSheet.create({
     marginLeft: -9,
     backgroundColor: "white",
   },
+
   iconbutton: {
     marginLeft: 170,
     marginTop: -10,
@@ -333,12 +337,6 @@ height:45,
     marginLeft:150,
     width:85,
     borderRadius:30,
-  },
-  signupButton: {
-    backgroundColor: "#3B5998",
-  },
-  ignUpText: {
-    color: 'white',
   },
   iconbutton: {
     marginLeft: 170,

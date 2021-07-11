@@ -6,6 +6,11 @@ import { ScrollView } from "react-native-gesture-handler";
 import Icon from "@mdi/react";
 import { mdiAccount } from "@mdi/js";
 import { StatusBar } from "expo-status-bar";
+import GLOBAL from "../global";
+
+import { makeRegistration } from "../adelementos/API_Calls";
+
+
 
 const registar = {
   1: "registar-me como voluntário",
@@ -47,12 +52,35 @@ const areasinteresse = {
   11: "Geral",
 };
 
+
+
+
 export default function Participacao_individual() {
+  const [Registar, setRegistar] = useState(null);
+  const [Setoratividade, setSetoratividade] = useState(null);
+  const [Areasinteresse, setAreasinteresse] = useState(null);
+
+
   const [isEnabled1, setIsEnabled1] = useState(false);
   const alternarSwitch1 = () => {
     setIsEnabled1((previousState) => !previousState);
   };
   const [input, setInput] = React.useState("");
+
+
+  function getKeyByValue(object, value) {
+    return Object.keys(object).find(key => object[key] === value);
+  }
+
+
+  onClickListenerParticipacoes = (viewId) => {
+    //Alert.alert("Alert", "Button pressed "+viewId);
+    GLOBAL.registar = getKeyByValue(registar, Registar[1]);
+    GLOBAL.setoratividade = getKeyByValue(setoratividade, Setoratividade[1]);
+    GLOBAL.areainteresse = getKeyByValue(areasinteresse, Areasinteresse[1]);
+  };
+
+
 
   return (
     <ScrollView style={styles.container}>
@@ -64,8 +92,8 @@ export default function Participacao_individual() {
               search={false} // should show search bar?
               multiple={true} //
               returnValue={"label"} // label or value
-              callback={(res) => {
-                console.log(res);
+              callback={(registo) => {
+                setRegistar(registo);
               }} // callback, array of selected items
               rowBackgroundColor={"#97C2FF"}
               rowHeight={36}
@@ -104,8 +132,8 @@ export default function Participacao_individual() {
                 search={false} // should show search bar?
                 multiple={true} //
                 returnValue={"label"} // label or value
-                callback={(res) => {
-                  console.log(res);
+                callback={(setor) => {
+                  setSetoratividade(setor);
                 }} // callback, array of selected items
                 rowBackgroundColor={"#97C2FF"}
                 rowHeight={36}
@@ -127,8 +155,8 @@ export default function Participacao_individual() {
                 search={false} // should show search bar?
                 multiple={true} //
                 returnValue={"label"} // label or value
-                callback={(res) => {
-                  console.log(res);
+                callback={(area) => {
+                  setAreasinteresse(area);
                 }} // callback, array of selected items
                 rowBackgroundColor={"#97C2FF"}
                 rowHeight={30}
@@ -151,7 +179,7 @@ export default function Participacao_individual() {
           icon="check-circle"
           color={"gray"}
           size={45}
-          onPress={() => console.log("Pressed")}
+          onPress={() => onClickListenerParticipacoes("")}
         />
       </View>
     </ScrollView>
