@@ -1,8 +1,8 @@
-/*import React from "react";
+import React from "react";
 import SplashScreenMask from "react-native-splash-screen-mask";
 import { StyleSheet, Text, View } from "react-native";
 
-import IMAGE from "../assets/logo.png";
+import IMAGE from "../assets/logo_tutorial.png";
 
 const Splash = ({ navigation }) => {
   return (
@@ -42,4 +42,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Splash;*/
+export default Splash;

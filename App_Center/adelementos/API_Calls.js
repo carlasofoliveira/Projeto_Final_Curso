@@ -45,15 +45,28 @@ export function makeRegistration(
   }).then((data) => data.json());
 }
 
-export function solicitarvoluntario(pedirvoluntario) {
-  return fetch("http://deca-centerweb.ua.pt/voluntario", {
+export function criarnovoevento(designacao, descricao, local, datatime ) {
+  return fetch("http://deca-centerweb.ua.pt/criarEvento", {
     method: "POST",
     headers: {
       Accept: "aplication/json",
       "Content-Type": "application/json",
     },
     body: JSON.stringify({
-      voluntario: pedirvoluntario,
+      designacao: designacao,
+      descricao: descricao,
+      local: local,
+      datatime: datatime,
     }),
+  }).then((data) => data.json());
+}
+
+
+export function destaquesevento() {
+  return fetch("http://deca-centerweb.ua.pt/destaques", {
+    method: "GET",
+    headers: {
+      Accept: "aplication/json",
+    },
   }).then((data) => data.json());
 }

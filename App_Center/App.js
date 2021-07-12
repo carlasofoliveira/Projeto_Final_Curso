@@ -17,7 +17,7 @@ import adicionar_Recursos from "./adelementos/Recurso";
 import Mapa from "./screens/Mapa";
 import Participacao_individual from "./adelementos/Participacoes";
 import Splash from "./screens/Splash";
-import Tutorial from "./screens/tutorial";
+import tutorial from "./screens/tutorial";
 import adicionar_Voluntarios from "./adelementos/Voluntario";
 import setor_publico from "./adelementos/Setor_publico";
 import setor_privado from "./adelementos/Setor_privado";
@@ -138,6 +138,12 @@ const App = () => {
   return (
     <NavigationContainer ref={navigationRef}>
       <Stack.Navigator>
+      <Stack.Screen
+        options={{ headerShown: false }}
+        name="Splash"
+        component={Splash}
+      />
+      <Stack.Screen options={{ headerShown: false }} name="tutorial" component={tutorial} />
         <Stack.Screen
           name="Home"
           component={AdicionarTabNavigator}

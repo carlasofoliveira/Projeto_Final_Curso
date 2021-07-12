@@ -16,7 +16,7 @@ import {
 import AppIntroSlider from 'react-native-app-intro-slider';
 
 //import AppIntroSlider to use it
-/*import Icon from 'react-native-ionicons';
+import Icon from 'react-native-ionicons';
 
 const Tutorial = ({ navigation }) => {
   const [showRealApp, setShowRealApp] = useState(false);
@@ -154,15 +154,12 @@ const slides = [
   {
     key: 's1',
     text: 'A app CeNTER visa mediar a partilha de informação e o conhecimento mútuo sobre entidades, iniciativas, eventos, voluntários e recursos, como contributo para estimular a inovação de base territorial, na região Centro de Portugal.',
-    image: 
-      require ( "../assets/logo.png"),
+    
     backgroundColor: '#97C2FF',
   },
   {
     key: 's2',
-    image: 
-      require ( "../assets/logo.png"),
-  
+
     backgroundColor: '#97C2FF',
   },
   {
@@ -187,4 +184,4 @@ const slides = [
     title: 'Train Booking',
     backgroundColor: '#97C2FF',
   },
-];*/
+];

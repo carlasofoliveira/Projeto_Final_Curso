@@ -43,23 +43,23 @@ const Mapa = () => {
     categories: [
     
       {
-        name: "Fastfood Center",
+        name: "iniciativas",
         
       },
       {
-        name: "Restaurant",
+        name: "eventos",
         
       },
       {
-        name: "Dineouts",
+        name: "entidades",
        
       },
       {
-        name: "Snacks Corner",
+        name: "voluntarios",
         
       },
       {
-        name: "Hotel",
+        name: "recursos",
       
       },
     ],

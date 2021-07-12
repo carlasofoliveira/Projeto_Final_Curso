@@ -7,8 +7,8 @@ import { List, Divider, IconButton } from "react-native-paper";
 import Carousel from "simple-carousel-react-native";
 import { ScrollView } from "react-native";
 import Entrar_criar from "../adelementos/Entrar_criar";
-import GLOBAL from "../global"
-import { solicitarvoluntario } from "../adelementos/API_Calls";
+import GLOBAL from "../global";
+import { criarnovoevento } from "../adelementos/API_Calls";
 
 import Icon from "@mdi/react";
 import { mdiAccount } from "@mdi/js";
@@ -51,14 +51,17 @@ export default function Novo_Evento({navigation}) {
   const [isLoading, setLoading] = useState(true);
   const [isUserLogged, setLoginData] = useState(true);
 
-  const [pedirvoluntario, setVoluntario] = useState(null);
+  const [designacao, setdesignacao] = useState(null);
+  const [descricao, setdescricao] = useState(null);
+  const [local, setlocal] = useState(null);
+  const [datatime, setdatatime] = useState(null);
 
-  onClickListener = (viewId) => {
+  onClickListenerEvento = (viewId) => {
     //Alert.alert("Alert", "Button pressed "+viewId);
-    solicitarvoluntario(pedirvoluntario).then((resposta) => {
+    criarnovoevento(designacao, descricao, local, datatime).then((resposta) => {
       console.log("resposta", resposta);
-      if (resposta.solicitadovoluntario == true){
-        
+      if (resposta.novoevento == true){
+        Alert.alert("Novo evento criado com sucesso"); 
       }
       else{
       
@@ -66,8 +69,17 @@ export default function Novo_Evento({navigation}) {
     });
   }
  
+
+  const onChange = (selectedatatime) => {
+    console.log(selectedatatime);
+    const currentDate = selectedatatime || datatime;
+    //setShow(Platform.OS === 'ios');
+    console.log(currentDate)
+    setdatatime(currentDate);
+  };
+
 useEffect(() => {
-    console.log("email: ", GLOBAL.EMAIL);
+    //console.log("email: ", GLOBAL.EMAIL);
     if (GLOBAL.EMAIL !== null && GLOBAL.PASSWORD !== null){
       isLoggedIn(GLOBAL.EMAIL, GLOBAL.PASSWORD).then((isLogged) => {
       console.log("isLogged", isLogged.logado);
@@ -108,11 +120,12 @@ useEffect(() => {
       <StatusBar style="auto" />
       <TextInput
         style={styles.input}
-        onChangeText={(text) => setInput(text)}
+        onChangeText={(Designacao) => setdesignacao(Designacao)}
         onSubmitEditing={() => {
           setInput("");
         }}
         placeholder="inserir designação..."
+        value={designacao}
       />
       <Divider />
       <Divider />
@@ -121,11 +134,12 @@ useEffect(() => {
           <List.Accordion title="Descrição" id="1">
             <TextInput
               style={styles.input}
-              onChangeText={(text) => setInput(text)}
+              onChangeText={(Descricao) => setdescricao(Descricao)}
               onSubmitEditing={() => {
                 setInput("");
               }}
               placeholder="inserir descrição..."
+              value={descricao}
             />
           </List.Accordion>
         </Text>
@@ -135,11 +149,12 @@ useEffect(() => {
           <List.Accordion title="Local" id="2">
             <TextInput
               style={styles.input}
-              onChangeText={(text) => setInput(text)}
+              onChangeText={(Local) => setlocal(Local)}
               onSubmitEditing={() => {
                 setInput("");
               }}
               placeholder="inserir local..."
+              value={local}
             />
           </List.Accordion>
         </Text>
@@ -176,6 +191,8 @@ useEffect(() => {
           selected="2021-07-23"
           mode="calendar"
           minuteInterval={30}
+          value={datatime}
+          onDateChange={onChange}
           style={{ borderRadius: 20 }}
         />
       ) : (
@@ -363,7 +380,7 @@ useEffect(() => {
           icon="check-circle"
           color={"gray"}
           size={45}
-          onPress={() => console.log("Pressed")}
+          onPress={() => onClickListenerEvento("")}
         />
       </View>
     </ScrollView>
