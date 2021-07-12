@@ -128,7 +128,6 @@ function AdicionarTabNavigator({ navigation, route }) {
           ),
         }}
       />
-      <Tab.Screen name="entrar criar" component={Entrar_criar} />
     </Tab.Navigator>
   );
 }
